@@ -81,15 +81,17 @@ const Components = () => {
             <h1 className='text-center'>Buttons</h1>
             <div className='flex flex-col gap-2 rounded-lg p-2 bg-gray-400'>
               <p className='text-center mb-2'>Props</p>
-              <code>type?: 'primary' | 'primary-d' | 'primary-i' | 'primary-i-d'</code>
-              <code>shape?: 'sqaure' | 'round' | 'circle'</code>
-              <code>size?: 'sm' | 'md' | 'lg'</code>
+              <code>
+                type?: &apos;primary&apos; | &apos;primary-d&apos; | &apos;primary-i&apos; | &apos;primary-i-d&apos;
+              </code>
+              <code>shape?: &apos;sqaure&apos; | &apos;round&apos; | &apos;circle&apos;</code>
+              <code>size?: &apos;sm&apos; | &apos;md&apos; | &apos;lg&apos;</code>
             </div>
             <div className='flex flex-col gap-2 rounded-lg p-2 bg-gray-400'>
               <p className='text-center mb-2'>Default</p>
-              <code> type = 'primary'</code>
-              <code>size = 'md'</code>
-              <code>shape = 'round'</code>
+              <code> type = &apos;primary&apos;</code>
+              <code>size = &apos;md&apos;</code>
+              <code>shape = &apos;round&apos;</code>
             </div>
           </div>
 

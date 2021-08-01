@@ -1,8 +1,9 @@
+import Image from 'next/image'
 import React from 'react'
 
 export type Props = {
   testimonials: {
-    imageSrc: string
+    imageSrc: any
     quote: string
     customerName: string
   }[]
@@ -32,8 +33,8 @@ const ThreeColumnWithProfileImage: React.FC<Props> = ({ subheading, heading, tes
           {testimonials.map((testimonial, index) => (
             <div className={Styles.TestimonialContainer} key={index}>
               <div className={Styles.Testimonial}>
-                <img className={Styles.Image} src={testimonial.imageSrc} />
-                <blockquote className={Styles.Quote}>"{testimonial.quote}"</blockquote>
+                <Image className={Styles.Image} src={testimonial.imageSrc} />
+                <blockquote className={Styles.Quote}>&quot;{testimonial.quote}&quot;</blockquote>
                 <p className={Styles.CustomerName}>- {testimonial.customerName}</p>
               </div>
             </div>

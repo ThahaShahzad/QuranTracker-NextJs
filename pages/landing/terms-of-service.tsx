@@ -34,12 +34,12 @@ const TermsofService = () => {
           <ul>
             <li>
               <strong>Affiliate</strong> means an entity that controls, is controlled by or is under common control with
-              a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities
-              entitled to vote for election of directors or other managing authority.
+              a party, where &quot;control&quot; means ownership of 50% or more of the shares, equity interest or other
+              securities entitled to vote for election of directors or other managing authority.
             </li>
             <li>
-              <strong>Company</strong> (referred to as either "the Company", "We", "Us" or "Our" in this Agreement)
-              refers to Treact Inc., Navi Mumbai.
+              <strong>Company</strong> (referred to as either &quot;the Company&quot;, &quot;We&quot;, &quot;Us&quot; or
+              &quot;Our&quot; in this Agreement) refers to Treact Inc., Navi Mumbai.
             </li>
             <li>
               <strong>Country</strong> refers to: Maharashtra, India
@@ -48,8 +48,8 @@ const TermsofService = () => {
               <strong>Service</strong> refers to the Website.
             </li>
             <li>
-              <strong>Terms and Conditions</strong> (also referred as "Terms") mean these Terms and Conditions that form
-              the entire agreement between You and the Company regarding the use of the Service.
+              <strong>Terms and Conditions</strong> (also referred as &quot;Terms&quot;) mean these Terms and Conditions
+              that form the entire agreement between You and the Company regarding the use of the Service.
             </li>
             <li>
               <strong>Third-party Social Media Service</strong> means any services or content (including data,
@@ -138,19 +138,19 @@ const TermsofService = () => {
             party's liability will be limited to the greatest extent permitted by law.
           </p>
 
-          <h1>"AS IS" and "AS AVAILABLE" Disclaimer</h1>
+          <h1>&quot;AS IS&quot; and &quot;AS AVAILABLE&quot; Disclaimer</h1>
           <p>
-            The Service is provided to You "AS IS" and "AS AVAILABLE" and with all faults and defects without warranty
-            of any kind. To the maximum extent permitted under applicable law, the Company, on its own behalf and on
-            behalf of its Affiliates and its and their respective licensors and service providers, expressly disclaims
-            all warranties, whether express, implied, statutory or otherwise, with respect to the Service, including all
-            implied warranties of merchantability, fitness for a particular purpose, title and non-infringement, and
-            warranties that may arise out of course of dealing, course of performance, usage or trade practice. Without
-            limitation to the foregoing, the Company provides no warranty or undertaking, and makes no representation of
-            any kind that the Service will meet Your requirements, achieve any intended results, be compatible or work
-            with any other software, applications, systems or services, operate without interruption, meet any
-            performance or reliability standards or be error free or that any errors or defects can or will be
-            corrected.
+            The Service is provided to You &quot;AS IS&quot; and &quot;AS AVAILABLE&quot; and with all faults and
+            defects without warranty of any kind. To the maximum extent permitted under applicable law, the Company, on
+            its own behalf and on behalf of its Affiliates and its and their respective licensors and service providers,
+            expressly disclaims all warranties, whether express, implied, statutory or otherwise, with respect to the
+            Service, including all implied warranties of merchantability, fitness for a particular purpose, title and
+            non-infringement, and warranties that may arise out of course of dealing, course of performance, usage or
+            trade practice. Without limitation to the foregoing, the Company provides no warranty or undertaking, and
+            makes no representation of any kind that the Service will meet Your requirements, achieve any intended
+            results, be compatible or work with any other software, applications, systems or services, operate without
+            interruption, meet any performance or reliability standards or be error free or that any errors or defects
+            can or will be corrected.
           </p>
           <p>
             Without limiting the foregoing, neither the Company nor any of the company's provider makes any

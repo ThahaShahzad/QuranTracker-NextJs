@@ -37,7 +37,7 @@ const Footer: React.FC<Props> = ({ links, logo, socialLinks }) => {
       <div className={Styles.Content}>
         <div className={Styles.Row}>
           <div className={Styles.LogoContainer}>
-            <Image src={logo.logoImg} />
+            <Image src={logo.logoImg} alt='logo' />
             <h4 className={Styles.LogoText}>{logo.logoText}</h4>
           </div>
           <div className={Styles.LinksContainer}>
@@ -49,8 +49,8 @@ const Footer: React.FC<Props> = ({ links, logo, socialLinks }) => {
           </div>
           <div className={Styles.SocialLinksContainer}>
             {socialLinks.map((socialLink, index) => (
-              <a key={index} className={Styles.SocialLink} href={socialLink.linkHref} target='_blank'>
-                <Image src={socialLink.linkIcon} />
+              <a key={index} className={Styles.SocialLink} href={socialLink.linkHref} target='_blank' rel='noreferrer'>
+                <Image src={socialLink.linkIcon} alt='img' />
               </a>
             ))}
           </div>

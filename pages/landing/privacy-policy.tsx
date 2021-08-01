@@ -48,14 +48,14 @@ const PrivacyPolicy = () => {
             </li>
             <li>
               <p>
-                <strong>Company</strong> (referred to as either "the Company", "We", "Us" or "Our" in this Agreement)
-                refers to Treact.
+                <strong>Company</strong> (referred to as either &quot;the Company&quot;, &quot;We&quot;, &quot;Us&quot;
+                or &quot;Our&quot; in this Agreement) refers to Treact.
               </p>
             </li>
             <li>
               <strong>Affiliate</strong> means an entity that controls, is controlled by or is under common control with
-              a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities
-              entitled to vote for election of directors or other managing authority.
+              a party, where &quot;control&quot; means ownership of 50% or more of the shares, equity interest or other
+              securities entitled to vote for election of directors or other managing authority.
             </li>
             <li>
               <strong>Account</strong> means a unique account created for You to access our Service or parts of our
@@ -141,9 +141,10 @@ const PrivacyPolicy = () => {
             You do not accept Cookies, You may not be able to use some parts of our Service.
           </p>
           <p>
-            Cookies can be "Persistent" or "Session" Cookies. Persistent Cookies remain on your personal computer or
-            mobile device when You go offline, while Session Cookies are deleted as soon as You close your web browser.
-            Learn more about cookies: <a href='https://www.termsfeed.com/blog/cookies/'>All About Cookies</a>.
+            Cookies can be &quot;Persistent&quot; or &quot;Session&quot; Cookies. Persistent Cookies remain on your
+            personal computer or mobile device when You go offline, while Session Cookies are deleted as soon as You
+            close your web browser. Learn more about cookies:{' '}
+            <a href='https://www.termsfeed.com/blog/cookies/'>All About Cookies</a>.
           </p>
           <p>We use both session and persistent Cookies for the purposes set out below:</p>
           <ul>
@@ -342,7 +343,7 @@ const PrivacyPolicy = () => {
           </p>
           <p>
             We will let You know via email and/or a prominent notice on Our Service, prior to the change becoming
-            effective and update the "Last updated" date at the top of this Privacy Policy.
+            effective and update the &quot;Last updated&quot; date at the top of this Privacy Policy.
           </p>
           <p>
             You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy

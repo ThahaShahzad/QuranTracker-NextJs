@@ -42,7 +42,7 @@ const ContactUs = ({
     <div className={Styles.Container}>
       <div className={Styles.TwoColumn}>
         <div className={Styles.ImageColumn}>
-          <Image className={Styles.Image} src={EmailIllustrationSrc} />
+          <Image className={Styles.Image} src={EmailIllustrationSrc} alt='img' />
         </div>
         <div className={Styles.TextColumn}>
           <div className={Styles.TextContent}>

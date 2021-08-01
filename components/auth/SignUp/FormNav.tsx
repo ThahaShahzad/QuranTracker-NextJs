@@ -49,7 +49,7 @@ const FormNav: React.FC = () => {
   return (
     <div className={Styles.MainContainer}>
       <Link type='primary-nl' className='flex items-center' to='/landing'>
-        <Image src={logo} />
+        <Image src={logo} alt='logo' />
         <h4 className='ml-4'>QuranTracker</h4>
       </Link>
       <h4 className='mt-5 hidden lg:block'>Sign Up</h4>

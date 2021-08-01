@@ -20,7 +20,7 @@ const TopNav = () => {
         <small className='hidden sm:block bg-normal-light rounded-xl p-2'>{date}</small>
         <ThemeToggle />
         <div className='rounded-full'>
-          <Image src='/images/male-avatar.png' width='45' height='45' />
+          <Image src='/images/male-avatar.png' alt='male avatar' width='45' height='45' />
         </div>
       </div>
     </nav>
