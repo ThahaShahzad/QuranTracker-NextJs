@@ -3,6 +3,7 @@
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["components/*"],
+      "@/firebase/*": ["firebase/*"],
       "@/pages/*": ["pages/*"],
       "@/public/*": ["public/*"]
     },
