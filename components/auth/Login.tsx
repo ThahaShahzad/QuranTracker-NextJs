@@ -44,9 +44,9 @@ const Login = () => {
           <div className={Styles.MainContent}>
             <h3>Sign In To QuranTracker</h3>
             <div className={Styles.FormContainer}>
-              <a className='text-inverse' href='/api/auth/login'>
+              <Link className='text-inverse' to='/api/auth/login'>
                 Login
-              </a>
+              </Link>
               <p className='mt-6 text-xs  text-center'>
                 <Link type='primary-i' to='/auth/forgotpassword'>
                   Forgot Password ?
@@ -63,7 +63,7 @@ const Login = () => {
         </div>
         <div className={Styles.IllustrationContainer}>
           <div className={Styles.IllustrationImage}>
-            <Image src={illustration} />
+            <Image src={illustration} alt='illustration' />
           </div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import { Link } from '@/components/custom'
 import { useDate } from '@/components/hooks/useDate'
 import { useUser } from '@auth0/nextjs-auth0'
 import dynamic from 'next/dynamic'
@@ -23,7 +24,7 @@ const TopNav = () => {
         <small className='hidden sm:block bg-normal-light rounded-xl p-2'>{time}</small>
         <small className='hidden sm:block bg-normal-light rounded-xl p-2'>{date}</small>
         <ThemeToggle />
-        <a href='/api/auth/logout'>
+        <Link type='primary-nl' to='/api/auth/logout'>
           <Image
             src={user?.picture ? user?.picture : '/images/male-avatar.png'}
             className='rounded-full'
@@ -31,7 +32,7 @@ const TopNav = () => {
             width='50'
             height='50'
           />
-        </a>
+        </Link>
       </div>
     </nav>
   )

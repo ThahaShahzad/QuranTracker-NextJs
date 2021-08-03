@@ -4,10 +4,10 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
 const SignUp = () => {
-  const router = useRouter()
-  useEffect(() => {
-    router.push('/auth/signup/personal-info')
-  }, [])
+  // const router = useRouter()
+  // useEffect(() => {
+  //   router.push('/auth/signup/personal-info')
+  // }, [])
   return (
     <div className='bg-inverse h-full'>
       <Head>
