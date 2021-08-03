@@ -1,16 +1,10 @@
-import { useRouter } from 'next/dist/client/router'
 import Head from 'next/head'
-import { useEffect, useState } from 'react'
 import TeacherHome from '@/components/views/Home'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import DashLayout from '@/components/layouts/DashLayout'
+import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 
 const Home = () => {
-  const router = useRouter()
-  const [isAuth, setisAuth] = useState(true)
-  useEffect(() => {
-    if (!isAuth) router.push('/landing')
-  }, [])
   return (
     <>
       <Head>

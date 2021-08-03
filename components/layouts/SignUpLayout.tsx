@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { ReactNode } from 'react'
 import FormNav from '../auth/SignUp/FormNav'
 
-const Layout: React.FC = ({ children }) => {
+const SignUpLayout: React.FC = ({ children }) => {
   const Styles = {
     Container: 'font-display min-h-screen bg-primary flex justify-center',
     FlexContainer: 'max-w-screen-2xl m-0 sm:m-20 bg-primary shadow-lg flex flex-col lg:flex-row flex-1',
@@ -26,6 +26,6 @@ const Layout: React.FC = ({ children }) => {
     </div>
   )
 }
-const SignUpLayout = (page: ReactNode) => <Layout>{page}</Layout>
+// const SignUpLayout = (page: ReactNode) => <Layout>{page}</Layout>
 
 export default SignUpLayout

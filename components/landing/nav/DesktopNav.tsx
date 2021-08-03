@@ -26,7 +26,7 @@ const DesktopNav: React.FC<Props> = ({ logo, links }) => {
   }
   return (
     <nav className={Styles.nav}>
-      <Link className={Styles.logo} type='primary-nl' to='/'>
+      <Link className={Styles.logo} type='primary-nl' to='/landing'>
         <Image src={logo.logoImg} alt='logo' />
         <h4 className={Styles.logoText}>{logo.logoText}</h4>
       </Link>

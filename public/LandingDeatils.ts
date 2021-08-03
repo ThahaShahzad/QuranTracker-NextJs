@@ -16,7 +16,7 @@ export const LandingPageDetails = {
       { linkText: 'About', linkRoute: '/landing/about' },
       { linkText: 'Pricing', linkRoute: '/landing/pricing' },
       { linkText: 'Contact Us', linkRoute: '/landing/contact-us' },
-      { linkText: 'Login', linkRoute: '/auth/login', secondary: true },
+      { linkText: 'Login', linkRoute: '/api/auth/login', secondary: true },
       { linkText: 'Sign Up', linkRoute: '/auth/signup', primary: true }
     ]
   },

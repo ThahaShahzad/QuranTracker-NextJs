@@ -1,7 +1,7 @@
-import Login from '@/components/auth/Login'
+import LoginComponent from '@/components/auth/Login'
 import Head from 'next/head'
 
-const login = () => {
+const Login = () => {
   return (
     <div className='bg-inverse h-full'>
       <Head>
@@ -9,9 +9,9 @@ const login = () => {
         <meta name='description' content='Login to QuranTracker' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Login />
+      <LoginComponent />
     </div>
   )
 }
 
-export default login
+export default Login
