@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next'
-import ClassBox from '../custom/classes/ClassBox'
+import ClassBox from './ClassBox'
 
 const Classes = () => {
   return (

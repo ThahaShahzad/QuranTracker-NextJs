@@ -3,9 +3,9 @@
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["components/*"],
-      "@/firebase/*": ["firebase/*"],
       "@/pages/*": ["pages/*"],
-      "@/public/*": ["public/*"]
+      "@/public/*": ["public/*"],
+      "@/util/*": ["util/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -21,6 +21,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "util/mongoDb.ts"],
   "exclude": ["node_modules"]
 }

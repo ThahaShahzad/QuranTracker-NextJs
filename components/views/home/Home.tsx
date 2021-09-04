@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
-import WeekCalender from '@/components/custom/home/WeekCalender'
-import NewAssignment from '../custom/home/NewAssignment'
-import RecentMessages from '../custom/home/RecentMessages'
+import WeekCalender from '@/components/views/home/WeekCalender'
+import NewAssignment from './NewAssignment'
+import RecentMessages from './RecentMessages'
 
 const Home = () => {
   return (

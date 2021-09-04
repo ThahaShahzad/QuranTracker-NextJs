@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 
-import { Link, Button } from '../custom/index'
+import { Link } from '../custom/index'
 import { BsArrowRight, BsFillPlayFill } from 'react-icons/bs'
+import { Heading, Text, useColorMode, Button } from '@chakra-ui/react'
 //import { AiOutlineClose } from 'react-icons/ai'
 
 //import ReactModalAdapter from './helpers/ReactModalAdapter.js'
@@ -28,7 +29,7 @@ const TwoColumnWithVideo: React.FC<Props> = ({
 }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const toggleModal = () => setModalIsOpen(!modalIsOpen)
-
+  const { colorMode, toggleColorMode } = useColorMode()
   const Styles = {
     Container: 'relative',
     TwoColumn: 'flex flex-col xl:flex-row md:items-center justify-center max-w-screen-xl mx-auto py-20 md:py-24',
@@ -52,18 +53,18 @@ const TwoColumnWithVideo: React.FC<Props> = ({
     <div className={Styles.Container}>
       <div className={Styles.TwoColumn}>
         <div className={Styles.LeftColumn}>
-          <h1 className={Styles.Heading}>{heading}</h1>
-          <p className={Styles.Description}>{description}</p>
+          <Heading pb='4' size='4xl'>
+            {heading}
+          </Heading>
+          <Text onClick={toggleColorMode}>{description}</Text>
           <div className={Styles.Actions}>
             <Button size='lg'>
               <div className='flex items-center gap-4'>
                 <BsArrowRight className={Styles.PrimaryButtonIcon} />
-                <Link to={primaryButtonUrl} type='primary-nl'>
-                  {primaryButtonText}
-                </Link>
+                <Link to={primaryButtonUrl}>{primaryButtonText}</Link>
               </div>
             </Button>
-            <Button type='primary-i' size='lg' onClick={toggleModal}>
+            <Button size='lg' onClick={toggleModal}>
               <div className='flex items-center gap-4'>
                 {/* <span className='playIconContainer'> */}
                 <BsFillPlayFill className={Styles.WatchVideoButtonPlayIcon} />

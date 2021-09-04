@@ -1,5 +1,5 @@
 import { Link } from '@/components/custom/index'
-import DashLayout from '@/components/layouts/DashLayout'
+import DashLayout from '@/components/layouts/Dash/DashLayout'
 import { useRouter } from 'next/router'
 import { BiArrowBack } from 'react-icons/bi'
 

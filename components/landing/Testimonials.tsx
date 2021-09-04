@@ -1,3 +1,4 @@
+import { Heading, Text } from '@chakra-ui/react'
 import Image from 'next/image'
 import React from 'react'
 
@@ -27,15 +28,17 @@ const ThreeColumnWithProfileImage: React.FC<Props> = ({ subheading, heading, tes
   return (
     <div className={Styles.Container}>
       <div className={Styles.ContentWithPaddingXl}>
-        {subheading && <h5 className={Styles.Subheading}>{subheading}</h5>}
-        <h2 className={Styles.Heading}>{heading}</h2>
+        {/* {subheading && <h5 className={Styles.Subheading}>{subheading}</h5>} */}
+        <Heading textAlign='center'>{heading}</Heading>
         <div className={Styles.Testimonials}>
           {testimonials.map((testimonial, index) => (
             <div className={Styles.TestimonialContainer} key={index}>
               <div className={Styles.Testimonial}>
                 <Image className={Styles.Image} src={testimonial.imageSrc} alt='profile pic' width={512} height={512} />
-                <blockquote className={Styles.Quote}>&quot;{testimonial.quote}&quot;</blockquote>
-                <p className={Styles.CustomerName}>- {testimonial.customerName}</p>
+                <Text as='blockquote' mt='4'>
+                  &quot;{testimonial.quote}&quot;
+                </Text>
+                <Text className={Styles.CustomerName}>- {testimonial.customerName}</Text>
               </div>
             </div>
           ))}

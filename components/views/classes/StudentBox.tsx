@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { Link } from '../Link'
+import { Link } from '../../custom/Link'
 
 const StudentBox = () => {
   const { asPath } = useRouter()

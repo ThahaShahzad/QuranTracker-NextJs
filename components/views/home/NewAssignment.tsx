@@ -1,34 +1,44 @@
 import { GetStaticProps } from 'next'
-import { Button, Link } from '@/components/custom/index'
+import { Box, Button, Heading } from '@chakra-ui/react'
+import { Link } from '@/components/custom/index'
+import { Select } from '@chakra-ui/react'
+import { useMyColors } from 'styles/colors'
 
 const NewAssignment = () => {
+  const { bgLight } = useMyColors()
   return (
-    <section className='hidden sm:block text-center bg-normal-light shadow-xl rounded-2xl mr-2 ml-5 mb-5 p-1 sm:p-2'>
-      <h4 className='md:text-4xl p-4'>New Assignment</h4>
+    <Box
+      as='section'
+      bg={bgLight}
+      shadow='2xl'
+      rounded='xl'
+      className='hidden sm:block text-center mr-2 ml-5 mb-5 p-1 sm:p-2'
+    >
+      <Heading className='md:text-4xl'>New Assignment</Heading>
       <form className='flex flex-col items-start gap-4 p-5'>
         <div>
           <label className='mr-2'>Class :</label>
-          <select name='classes' id='classes'>
+          <Select placeholder='Select option'>
             <option value='volvo'>class 1</option>
             <option value='saab'>class 2</option>
             <option value='mercedes'>class 3</option>
             <option value='audi'>class 4</option>
-          </select>
+          </Select>
         </div>
         <div>
           <label className='mr-2'>Student :</label>
-          <select name='classes' id='classes'>
+          <Select placeholder='Select option'>
             <option value='volvo'>class 1</option>
             <option value='saab'>class 2</option>
             <option value='mercedes'>class 3</option>
             <option value='audi'>class 4</option>
-          </select>
+          </Select>
         </div>
         <Link to={'/'} button>
-          <Button className='self-center'>Add Assignment</Button>
+          <Button>Add Assignment</Button>
         </Link>
       </form>
-    </section>
+    </Box>
   )
 }
 

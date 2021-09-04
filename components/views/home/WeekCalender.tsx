@@ -1,6 +1,9 @@
+import { Box, Heading, useColorModeValue } from '@chakra-ui/react'
 import { GetStaticProps } from 'next'
+import { useMyColors } from 'styles/colors'
 
 const WeekCalender = () => {
+  const { bgLight } = useMyColors()
   const curr = new Date()
   const week = []
   const weekRange = []
@@ -15,12 +18,18 @@ const WeekCalender = () => {
     week.push(day)
   }
   return (
-    <div className='bg-inverse sm:bg-normal-light sm:shadow-xl sm:rounded-3xl col-span-full sm:mx-5 sm:mb-5 sm:mt-2 p-2 overflow-auto'>
+    <Box
+      bg={bgLight}
+      rounded={{ sm: '3xl' }}
+      shadow={{ sm: 'xl' }}
+      className='col-span-full sm:mx-5 sm:mb-5 sm:mt-2 p-2 overflow-hidden'
+    >
+      {/* <div className='bg-inverse sm:bg-normal-light sm:shadow-xl sm:rounded-3xl col-span-full sm:mx-5 sm:mb-5 sm:mt-2 p-2 overflow-auto'> */}
       <div className='flex justify-center items-center gap-4'>
-        <h2>{curr.toLocaleString('en', { month: 'long' })}</h2>
-        <h4>
+        <Heading>{curr.toLocaleString('en', { month: 'long' })}</Heading>
+        <Heading>
           ({weekRange[0]} - {weekRange[4]})
-        </h4>
+        </Heading>
       </div>
       <div className='hidden sm:flex  w-full h-48 p-2'>
         {week.map((day, i) => (
@@ -29,9 +38,9 @@ const WeekCalender = () => {
               {weekDays[i]} - {day}
             </div>
             <div className='lg:hidden border-b border-normal'>{weekDaysLetter[i]}</div>
-            <div className='m-2 border-4 border-inverse rounded-2xl'>memo</div>
+            {/* <div className='m-2 border-4 border-inverse rounded-2xl'>memo</div>
             <div className='m-2 border-4 border-inverse rounded-2xl'>Resvison</div>
-            <div className='m-2 border-4 border-inverse rounded-2xl'>Sabqi</div>
+            <div className='m-2 border-4 border-inverse rounded-2xl'>Sabqi</div> */}
           </div>
         ))}
       </div>
@@ -46,7 +55,7 @@ const WeekCalender = () => {
           </div>
         ))}
       </div>
-    </div>
+    </Box>
   )
 }
 

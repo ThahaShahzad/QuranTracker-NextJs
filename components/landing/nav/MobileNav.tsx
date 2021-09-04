@@ -1,10 +1,18 @@
-import { useState } from 'react'
 import Image from 'next/image'
-import { motion, AnimatePresence } from 'framer-motion'
 import { FiMenu } from 'react-icons/fi'
-import { AiFillCloseSquare } from 'react-icons/ai'
-
-import { Button, Link } from '@/components/custom/index'
+import { Link } from '@/components/custom/index'
+import {
+  Button,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  Heading,
+  useDisclosure
+} from '@chakra-ui/react'
 
 export type Props = {
   logo: {
@@ -20,7 +28,7 @@ export type Props = {
 }
 
 const MobileNav: React.FC<Props> = ({ logo, links }) => {
-  const [showSideNav, setshowSideNav] = useState(false)
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const Styles = {
     nav: 'flex lg:hidden flex-1 justify-between items-center px-4 overflow-hidden',
     sideNav: 'navShadow h-full w-2/3 fixed top-0 right-0 z-20 bg-primary py-8 px-4 rounded-l-2xl sm:w-1/3',
@@ -34,16 +42,40 @@ const MobileNav: React.FC<Props> = ({ logo, links }) => {
   }
   return (
     <nav className={Styles.nav}>
-      <Link className={Styles.logo} type='primary-nl' to='/'>
+      <Link className={Styles.logo} to='/'>
         <Image src={logo.logoImg} alt='logo' />
-        <h4 className={Styles.logoText}>{logo.logoText}</h4>
+        <Heading size='lg' ml='2'>
+          {logo.logoText}
+        </Heading>
       </Link>
-      {!showSideNav && (
-        <div className='nav-toggle-open' onClick={() => setshowSideNav(!showSideNav)}>
+      {!isOpen && (
+        <div onClick={onOpen}>
           <FiMenu />
         </div>
       )}
-      <AnimatePresence>
+      <Drawer isOpen={isOpen} placement='right' onClose={onClose}>
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader mb='8'></DrawerHeader>
+          <DrawerBody>
+            <div className={Styles.navLinks}>
+              {links.map((link, index) => (
+                <div key={index}>
+                  {link.primary ? null : link.secondary ? null : <Link to={link.linkRoute}>{link.linkText}</Link>}
+                </div>
+              ))}
+            </div>
+          </DrawerBody>
+          <DrawerFooter justifyContent='center' experimental_spaceX='4'>
+            <Button variant='outline' mr={3} onClick={onClose}>
+              Cancel
+            </Button>
+            <Button>Save</Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+      {/* <AnimatePresence>
         {showSideNav && (
           <>
             <motion.aside
@@ -71,13 +103,13 @@ const MobileNav: React.FC<Props> = ({ logo, links }) => {
                     onClick={() => setshowSideNav(!showSideNav)}
                   >
                     {link.primary ? (
-                      <Link type='primary-nl' button={true} to={link.linkRoute}>
+                      <Link to={link.linkRoute}>
                         <Button full={true} type='primary-d'>
                           {link.linkText}
                         </Button>
                       </Link>
                     ) : link.secondary ? (
-                      <Link button={true} to={link.linkRoute}>
+                      <Link to={link.linkRoute}>
                         <Button full={true} className='bg-primary' type='primary-i-d'>
                           {link.linkText}
                         </Button>
@@ -105,7 +137,7 @@ const MobileNav: React.FC<Props> = ({ logo, links }) => {
             />
           </>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </nav>
   )
 }

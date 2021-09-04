@@ -1,5 +1,5 @@
-import { Button, Link } from '@/components/custom/index'
-import Image from 'next/image'
+import { Link, Image } from '@/components/custom/index'
+import { Heading, Button } from '@chakra-ui/react'
 import { Fragment } from 'react'
 //import { Link } from '../../index'
 
@@ -20,25 +20,27 @@ const DesktopNav: React.FC<Props> = ({ logo, links }) => {
   const Styles = {
     nav: 'hidden flex-1 justify-between items-center px-4 lg:flex',
     logo: 'flex items-center ml-3',
-    logoText: 'ml-3 text-normal',
+    logoText: 'ml-8',
     navLinks: 'flex items-center gap-8',
     actionLink: 'ml-8'
   }
   return (
     <nav className={Styles.nav}>
-      <Link className={Styles.logo} type='primary-nl' to='/landing'>
+      <Link className={Styles.logo} to='/landing'>
         <Image src={logo.logoImg} alt='logo' />
-        <h4 className={Styles.logoText}>{logo.logoText}</h4>
+        <Heading size='lg' ml='2'>
+          {logo.logoText}
+        </Heading>
       </Link>
       <div className={Styles.navLinks}>
         {links.map((link, index) => (
           <Fragment key={index}>
             {link.primary ? (
-              <Link type='primary-nl' to={link.linkRoute}>
+              <Link to={link.linkRoute}>
                 <Button>{link.linkText}</Button>
               </Link>
             ) : (
-              <Link className={`${link.linkText === 'Login' && Styles.actionLink}`} to={link.linkRoute}>
+              <Link variant='line' className={`${link.linkText === 'Login' && Styles.actionLink}`} to={link.linkRoute}>
                 {link.linkText}
               </Link>
             )}

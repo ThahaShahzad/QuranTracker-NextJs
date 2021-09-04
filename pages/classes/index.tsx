@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
-import ClassesGrid from '@/components/views/Classes'
-import DashLayout from '@/components/layouts/DashLayout'
+import ClassesGrid from '@/components/views/classes/Classes'
+import DashLayout from '@/components/layouts/Dash/DashLayout'
 
 const Classes = () => {
   return (

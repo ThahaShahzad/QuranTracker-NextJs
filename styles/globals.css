@@ -1,7 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-:root {
+/* blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre {
+  margin: 0;
+} */
+/* ol,
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+} */
+/* :root {
   --color-primary: #57a99a;
   --color-dark-primary: #76dbd1;
   --font-color: #0d1f23;
@@ -18,9 +39,9 @@
   --bg-light-color: #38474b;
   --font-dark-color: #0d1f23;
   --bg-dark-color: #f3f8f7;
-}
-@layer base {
-  /* Base */
+} */
+/* @layer base {
+  
   @font-face {
     font-family: Alaska;
     src: url('./alaska.ttf') format('truetype');
@@ -90,7 +111,7 @@
     }
   }
 
-  input[type='text'],
+  /* input[type='text'],
   input[type='password'],
   input[type='email'],
   input[type='number'],
@@ -108,7 +129,7 @@
   select[multiple],
   textarea {
     @apply w-full rounded-lg bg-normal-light shadow-sm focus:border-primary focus:ring-primary;
-  }
+  } 
 
   @media (prefers-reduced-motion: reduce) {
     html {
@@ -124,9 +145,78 @@
       scroll-behavior: auto !important;
     }
   }
-}
-@layer components {
+} */
+/* @layer components {
   .navShadow {
     box-shadow: 0 0 15px black;
   }
+} */
+
+/* @font-face {
+  font-family: Alaska;
+  src: url('./alaska.ttf') format('truetype');
+  font-display: swap;
 }
+html {
+  scroll-behavior: smooth;
+}
+body {
+  @apply min-h-screen
+                grid
+                  grid-rows-1;
+}
+img,
+picture {
+  @apply max-w-full 
+                block;
+}
+div,
+p,
+a {
+  @apply text-lg
+                sm:text-xl
+                text-normal
+                font-medium;
+} */
+/* h1,
+h2,
+h3,
+h4 {
+  @apply text-primary
+                 font-bold
+                 tracking-wider
+                 leading-snug;
+}
+h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
+}
+h2 {
+  font-size: 3rem;
+}
+h3 {
+  font-size: 2rem;
+}
+h4 {
+  font-size: 1.25rem;
+}
+small {
+  font-size: 0.5rem;
+}
+@media only screen and (min-width: 640px) {
+  h1 {
+    font-size: 4rem;
+  }
+  h2 {
+    font-size: 3.25rem;
+  }
+  h3 {
+    font-size: 2.5rem;
+  }
+  h4 {
+    font-size: 1.5rem;
+  }
+  small {
+    font-size: 0.75rem;
+  }
+} */

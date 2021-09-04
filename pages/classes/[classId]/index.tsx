@@ -1,8 +1,8 @@
 import { Link } from '@/components/custom/index'
-import StudentBox from '@/components/custom/classes/StudentBox'
+import StudentBox from '@/components/views/classes/StudentBox'
 import { useRouter } from 'next/router'
 import { BiArrowBack } from 'react-icons/bi'
-import DashLayout from '@/components/layouts/DashLayout'
+import DashLayout from '@/components/layouts/Dash/DashLayout'
 
 const ClassDetails = () => {
   const { pathname, query } = useRouter()

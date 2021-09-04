@@ -42,7 +42,7 @@ const Footer: React.FC<Props> = ({ links, logo, socialLinks }) => {
           </div>
           <div className={Styles.LinksContainer}>
             {links.map((link, index) => (
-              <Link key={index} to={link.linkRoute} type='primary-i' onClick={() => window.scrollTo(0, 0)}>
+              <Link key={index} to={link.linkRoute} onClick={() => window.scrollTo(0, 0)}>
                 {link.linkText}
               </Link>
             ))}
