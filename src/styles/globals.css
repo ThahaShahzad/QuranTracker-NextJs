@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  /* --color-primary: #57a99a;
+  --color-dark-primary: #76dbd1;
+  --font-color: #0d1f23;
+  --bg-color: #f3f8f7;
+  --bg-light-color: #d1d6d6fb;
+  --font-dark-color: #f3f8f7;
+  --bg-dark-color: #0d1f23; */
+
+  --color-primary: #57a99a;
+  --color-primaryOpp: #76dbd1;
+  --font-color: #0d1f23;
+  --fontOpp-color: #f3f8f7;
+  --bg-color: #f3f8f7;
+  --bgOpp-color: #0d1f23;
+  --font-light-color: #98a4b5;
+  --bg-light-color: #d1d6d6fb;
+}
+.dark {
+  /* --color-primary: #76dbd1;
+  --color-dark-primary: #57a99a;
+  --font-color: #f3f8f7;
+  --bg-color: #0d1f23;
+  --bg-light-color: #38474b;
+  --font-dark-color: #0d1f23;
+  --bg-dark-color: #f3f8f7; */
+
+  --color-primary: #76dbd1;
+  --color-primaryOpp: #57a99a;
+  --font-color: #f3f8f7;
+  --fontOpp-color: #0d1f23;
+  --bg-color: #0d1f23;
+  --bgOpp-color: #f3f8f7;
+  --font-light-color: #98a4b5;
+  --bg-light-color: #d1d6d6fb;
+}
+@layer base {
+  /* Base */
+  @font-face {
+    font-family: Alaska;
+    src: url('./alaska.ttf') format('truetype');
+    font-display: swap;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  img,
+  picture {
+    @apply max-w-full 
+                block;
+  }
+  div,
+  p,
+  a {
+    @apply text-lg
+                sm:text-xl
+                text-font
+                font-medium;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-primary
+                 font-bold
+                 tracking-wider
+                 leading-snug;
+  }
+  h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+  }
+  h2 {
+    font-size: 3rem;
+  }
+  h3 {
+    font-size: 2rem;
+  }
+  h4 {
+    font-size: 1.25rem;
+  }
+  small {
+    font-size: 0.5rem;
+  }
+  @media only screen and (min-width: 640px) {
+    h1 {
+      font-size: 4rem;
+    }
+    h2 {
+      font-size: 3.25rem;
+    }
+    h3 {
+      font-size: 2.5rem;
+    }
+    h4 {
+      font-size: 1.5rem;
+    }
+    small {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+@layer components {
+  .navShadow {
+    box-shadow: 0 0 15px black;
+  }
+}

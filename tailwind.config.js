@@ -1,7 +1,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
   mode: 'jit',
-  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  purge: ['./src/pages/**/*.{js,ts,jsx,tsx}', './src/components/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
   theme: {
     screens: {
@@ -11,12 +11,14 @@ module.exports = {
     extend: {
       colors: {
         primary: 'var(--color-primary)',
-        'primary-dark': 'var(--color-dark-primary)',
-        normal: 'var(--font-color)',
-        'normal-light': 'var(--bg-light-color)',
-        inverse: 'var(--bg-color)',
-        'normal-dark': 'var(--font-dark-color)',
-        'inverse-dark': 'var(--bg-dark-color)'
+        primaryOpp: 'var(--color-primaryOpp)',
+        heading: 'var(--heading-color)',
+        font: 'var(--font-color)',
+        fontOpp: 'var(--fontOpp-color)',
+        fontLight: 'var(--font-light-color)',
+        bg: 'var(--bg-color)',
+        bgOpp: 'var(--bgOpp-color)',
+        bgLight: 'var(--bg-light-color)'
       },
       spacing: {
         '32r': '32rem',
@@ -28,7 +30,7 @@ module.exports = {
         display: ['Alaska', 'sans-serif']
       },
       gridTemplateColumns: {
-        lgDashLayout: '200px auto',
+        lgDashLayout: '300px auto',
         DashLayout: '100px auto'
       },
       gridTemplateRows: {
