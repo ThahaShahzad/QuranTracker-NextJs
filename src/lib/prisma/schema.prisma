@@ -66,6 +66,13 @@ model Enrollment {
   classId   String
 }
 
+model VECPJWT {
+  id        String   @id @default(cuid())
+  userName  String
+  jwt       String
+  createdAt DateTime @default(now())
+}
+
 enum AccType {
   Admin
   Teacher
