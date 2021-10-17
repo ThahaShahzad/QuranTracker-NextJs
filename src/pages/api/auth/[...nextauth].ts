@@ -28,8 +28,11 @@ export default NextAuth({
         // You can also use the `req` object to obtain additional parameters
         // (i.e., the request IP address)
         try {
-          const user = await prisma.user.findFirst({ where: { userName: credentials.username } })
-
+          const user = await prisma.user.findFirst({
+            where: { userName: credentials.username },
+            include: { school: true }
+          })
+          console.log(user)
           // If no error and we have user data, return it
           if (user) {
             const isPassMatch = await compare(credentials.password, user?.password)
@@ -64,7 +67,7 @@ export default NextAuth({
       isNewUser?: boolean | undefined
     ) {
       const userEmail = token?.email as string
-      const dbUser = await prisma.user.findFirst({ where: { email: userEmail } })
+      const dbUser = await prisma.user.findFirst({ where: { email: userEmail }, include: { school: true } })
       token.user = dbUser
       return token
     }

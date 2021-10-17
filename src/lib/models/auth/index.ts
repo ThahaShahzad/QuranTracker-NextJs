@@ -1,5 +1,5 @@
-import Joi from 'joi'
 import { AdminSignUpSchema, AdminSignUpType } from './signup'
+import { AdminApplicationSchema, AdminApplicationType } from './adminApplication'
 
-export { AdminSignUpSchema }
-export type { AdminSignUpType }
+export { AdminSignUpSchema, AdminApplicationSchema }
+export type { AdminSignUpType, AdminApplicationType }

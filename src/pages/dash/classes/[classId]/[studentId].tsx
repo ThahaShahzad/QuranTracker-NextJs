@@ -1,5 +1,5 @@
 import { Link } from 'components/custom/index'
-import DashLayout from 'components/layouts/dash/DashLayout'
+import DashLayout from 'components/layouts/DashLayout'
 import { useRouter } from 'next/router'
 import { BiArrowBack } from 'react-icons/bi'
 
@@ -11,7 +11,7 @@ const StudentDetails = () => {
   return (
     <div>
       <div className='flex justify-between'>
-        <Link type='primary-nl' to={`/classes/${classId}`}>
+        <Link type='primary-nl' to={`/dash/classes/${classId}`}>
           <BiArrowBack className='m-2 w-10 h-10 p-2 bg-primary rounded-3xl' />
         </Link>
         <h3 className='text-center p-2'>{studentId}</h3>

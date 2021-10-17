@@ -1,10 +1,10 @@
 import { BsCheck, BsChatFill, BsFillHouseFill, BsFillPeopleFill, BsFillPersonFill } from 'react-icons/bs'
 
-import BottomNav from './BottomNav'
+import BottomNav from 'components/dash/layout/BottomNav'
 import { SideNav } from 'components/custom'
-import TopNav from 'components/layouts/dash/TopNav'
+import TopNav from 'components/dash/layout/TopNav'
 
-const DashLayout: React.FC = ({ children }) => {
+const GridLayout: React.FC = ({ children }) => {
   const sideNavItems = [
     {
       name: 'Home',
@@ -39,10 +39,7 @@ const DashLayout: React.FC = ({ children }) => {
         baseUrl='/dash'
         header={{ text: 'QuranTracker', route: '/dash' }}
         styles={{
-          textColor: 'text-font',
-          selectedText: 'text-font',
-          bg: 'bg-bg',
-          selectedBg: 'bg-fontLight'
+          bg: 'bg-bg'
         }}
         listItems={sideNavItems}
       />
@@ -54,4 +51,4 @@ const DashLayout: React.FC = ({ children }) => {
   )
 }
 
-export default DashLayout
+export default GridLayout

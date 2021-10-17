@@ -1,30 +1,30 @@
 import { useRouter } from 'next/router'
-import { Link } from '../Link'
+import { Link } from '../../custom/Link'
 
-const StudentBox = () => {
-  const { asPath } = useRouter()
-  const students = [
+const ClassBox = () => {
+  const { pathname } = useRouter()
+  const classes = [
     {
-      id: 1,
-      name: 'student 1',
+      id: 123,
+      name: 'class 1',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     },
     {
-      id: 2,
-      name: 'student 2',
+      id: 345,
+      name: 'class 2',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     },
     {
-      id: 3,
-      name: 'student 3',
+      id: 768,
+      name: 'class 3',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     },
     {
-      id: 4,
-      name: 'student 4',
+      id: 890,
+      name: 'class 4',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     }
@@ -32,11 +32,11 @@ const StudentBox = () => {
 
   return (
     <>
-      {students.map((student) => (
-        <Link key={student.id} button type='primary-nl' to={`${asPath}/${student.id}`}>
+      {classes.map((clas) => (
+        <Link key={clas.id} type='primary-nl' to={`${pathname}/${clas.id}`}>
           <div className='bg-bg shadow-xl rounded-2xl flex flex-col items-center p-2'>
-            <h4>{student.name}</h4>
-            {/* <small>{student.description}</small> */}
+            <h3>{clas.name}</h3>
+            <small>{clas.description}</small>
           </div>
         </Link>
       ))}
@@ -44,4 +44,4 @@ const StudentBox = () => {
   )
 }
 
-export default StudentBox
+export default ClassBox

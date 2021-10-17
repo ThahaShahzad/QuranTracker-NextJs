@@ -1,5 +1,4 @@
-import { GetStaticProps } from 'next'
-import ClassBox from '../custom/classes/ClassBox'
+import ClassBox from './classes/ClassBox'
 
 const Classes = () => {
   return (
@@ -10,14 +9,6 @@ const Classes = () => {
       </div>
     </main>
   )
-}
-
-export const getStaticProps: GetStaticProps = async (ctx) => {
-  return {
-    props: {
-      data: null
-    }
-  }
 }
 
 export default Classes

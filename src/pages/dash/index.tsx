@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import TeacherHome from 'components/dash/Home'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-import DashLayout from 'components/layouts/dash/DashLayout'
+import DashLayout from 'components/layouts/DashLayout'
+
 import { GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/client'
 import { DbUser } from 'lib/models/dbuser'

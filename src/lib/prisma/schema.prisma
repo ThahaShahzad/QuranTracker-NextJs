@@ -11,26 +11,29 @@ generator client {
 }
 
 model User {
-  id                   String    @id @default(cuid())
-  userName             String    @unique
-  email                String    @unique
-  password             String
-  image                String?
-  isEmailVerified      Boolean   @default(false)
-  submittedApplication Boolean   @default(false)
-  isActivated          Boolean   @default(false)
-  accType              AccType   @default(Admin)
-  school               School?   @relation(references: [id], fields: [schoolId])
-  schoolId             String?
-  classes              Classes[]
-  children             Student[]
-  createdAt            DateTime  @default(now())
-  updatedAt            DateTime  @default(now())
+  id                    String    @id @default(cuid())
+  userName              String    @unique
+  email                 String    @unique
+  password              String
+  image                 String?
+  isEmailVerified       Boolean   @default(false)
+  submittedApplication  Boolean   @default(false)
+  isActivated           Boolean   @default(false)
+  initalAccountCreation Boolean   @default(false)
+  isActive              Boolean   @default(true)
+  accType               AccType   @default(Admin)
+  school                School?   @relation(references: [id], fields: [schoolId])
+  schoolId              String?
+  classes               Classes[]
+  children              Student[]
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @default(now())
 }
 
 model School {
   id         String     @id @default(cuid())
   schoolName String
+  email      String
   state      String
   city       String
   phone      String
@@ -68,9 +71,15 @@ model Enrollment {
 
 model VECPJWT {
   id        String   @id @default(cuid())
-  userName  String
+  userId    String
   jwt       String
+  type      JWTType
   createdAt DateTime @default(now())
+}
+
+enum JWTType {
+  verifyEmail
+  ChangePassword
 }
 
 enum AccType {

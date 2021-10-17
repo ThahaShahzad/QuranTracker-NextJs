@@ -9,7 +9,8 @@ interface ButtonProps {
   size?: 'sm' | 'md' | 'lg'
   className?: string
   full?: boolean
-  onClick?: () => void
+  disabled?: boolean
+  onClick?: any
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -21,6 +22,7 @@ export const Button: React.FC<ButtonProps> = ({
   shape = 'round',
   className,
   full = false,
+  disabled = false,
   children,
   ...props
 }) => {
@@ -45,6 +47,7 @@ export const Button: React.FC<ButtonProps> = ({
     <button
       type={submitType}
       className={`${Styles[type]} ${SizeStyles[size]} ${ShapeStyles[shape]} ${className} ${full ? 'w-full' : 'w-auto'}`}
+      disabled={disabled}
       {...props}
     >
       {children}

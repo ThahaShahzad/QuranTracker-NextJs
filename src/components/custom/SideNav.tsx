@@ -26,7 +26,7 @@ interface props {
 const SideNav = ({ baseUrl, styles, listItems, header }: props) => {
   const { pathname } = useRouter()
   const currPath = pathname === baseUrl ? '/' : pathname.substring(baseUrl?.length as number)
-  const selectedBg = styles?.selectedBg ? `${styles.selectedBg}` : 'bg-primary-op-20'
+  const selectedBg = styles?.selectedBg ? `${styles.selectedBg}` : 'bg-primary-op-50'
   const Styles = {
     aside: `hidden lg:flex flex-col row-span-full p-2 ${styles?.bg}`,
     logo: 'text-center p-2',
@@ -41,11 +41,21 @@ const SideNav = ({ baseUrl, styles, listItems, header }: props) => {
         <h4 className={Styles.logoText}>{header.text}</h4>
       </Link>
       <ul className={Styles.list}>
-        {listItems.map((listItem) => (
-          <li key={listItem.name} className='hover:text-primary'>
+        {listItems.map((listItem, i) => (
+          <li key={listItem.name}>
             <Link
-              className={`${Styles.listItem} ${currPath === listItem.path && selectedBg} ${
-                currPath === listItem.path && styles?.selectedText
+              className={`${Styles.listItem} ${
+                (pathname === baseUrl
+                  ? currPath === listItem.path
+                  : i === 0
+                  ? false
+                  : currPath.includes(listItem.path)) && selectedBg
+              } ${
+                (pathname === baseUrl
+                  ? currPath === listItem.path
+                  : i === 0
+                  ? false
+                  : currPath.includes(listItem.path)) && styles?.selectedText
               }`}
               type='primary-nl'
               icon={<listItem.icon />}

@@ -1,14 +1,21 @@
 import DashLayout from 'components/layouts/DashLayout'
-
-import { GetServerSidePropsContext } from 'next'
-import { getSession } from 'next-auth/client'
 import { DbUser } from 'lib/models/dbuser'
+import { GetServerSidePropsContext } from 'next'
+import Head from 'next/head'
+import { getSession } from 'next-auth/client'
+import SettingsComponent from 'components/dash/Settings'
 
-const Students = () => {
+const Settings = () => {
   return (
-    <main className='flex justify-center'>
-      <h2>Students</h2>
-    </main>
+    <>
+      <Head>
+        <title>Settings - QuranTracker</title>
+        <meta name='description' content='Settings page of QuranTracker' />
+        <link rel='icon' href='/favicon.ico' />
+      </Head>
+
+      <SettingsComponent />
+    </>
   )
 }
 
@@ -24,6 +31,6 @@ export async function getServerSideProps({ req, res }: GetServerSidePropsContext
   }
 }
 
-Students.getLayout = DashLayout
+Settings.getLayout = DashLayout
 
-export default Students
+export default Settings

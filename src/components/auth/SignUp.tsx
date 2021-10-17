@@ -19,7 +19,6 @@ const SignUp = () => {
   } = useForm<AdminSignUpType>({
     resolver: joiResolver(AdminSignUpSchema)
   })
-  console.log(errors)
   const router = useRouter()
   const onSubmit = async (formData: AdminSignUpType) => {
     try {

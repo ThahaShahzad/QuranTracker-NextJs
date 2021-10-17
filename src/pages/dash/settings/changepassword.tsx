@@ -1,20 +1,20 @@
-import Head from 'next/head'
-import ClassesGrid from 'components/dash/Classes'
 import DashLayout from 'components/layouts/DashLayout'
-
-import { GetServerSidePropsContext } from 'next'
+import Head from 'next/head'
+import ChangePasswordComponent from 'components/dash/settings/changepassword'
 import { getSession } from 'next-auth/client'
 import { DbUser } from 'lib/models/dbuser'
+import { GetServerSidePropsContext } from 'next'
 
-const Classes = () => {
+const Changepassword = () => {
   return (
     <>
       <Head>
-        <title>My Classes - QuranTracker</title>
-        <meta name='description' content='Classes page of QuranTracker' />
+        <title>Change Password - QuranTracker</title>
+        <meta name='description' content='Change Password page of QuranTracker' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <ClassesGrid />
+
+      <ChangePasswordComponent />
     </>
   )
 }
@@ -30,6 +30,7 @@ export async function getServerSideProps({ req, res }: GetServerSidePropsContext
     props: { session } // will be passed to the page component as props
   }
 }
-Classes.getLayout = DashLayout
 
-export default Classes
+Changepassword.getLayout = DashLayout
+
+export default Changepassword

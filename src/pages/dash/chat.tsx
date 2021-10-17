@@ -1,4 +1,4 @@
-import DashLayout from 'components/layouts/dash/DashLayout'
+import DashLayout from 'components/layouts/DashLayout'
 import { GetStaticProps } from 'next'
 
 const Chat = () => {
