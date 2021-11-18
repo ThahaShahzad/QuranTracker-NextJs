@@ -80,5 +80,7 @@ const About = () => {
     </div>
   )
 }
+
 About.getLayout = LandingLayout
+
 export default About

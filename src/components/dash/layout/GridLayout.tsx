@@ -33,7 +33,7 @@ const GridLayout: React.FC = ({ children }) => {
     }
   ]
   return (
-    <div className='font-display bg-font-light grid grid-flow-col grid-cols-1 grid-rows-[75px,auto,75px] lg:grid-cols-[100px,auto] lg:grid-flow-row lg:grid-rows-[10%,90%] xl:grid-cols-[300px,auto]'>
+    <div className='font-display h-screen bg-font-light grid grid-flow-col grid-cols-1 grid-rows-[75px,auto,75px] lg:grid-cols-[100px,auto] lg:grid-flow-row lg:grid-rows-[10%,90%] xl:grid-cols-[300px,auto] '>
       <TopNav />
       <SideNav
         baseUrl='/dash'

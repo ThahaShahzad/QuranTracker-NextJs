@@ -1,22 +1,17 @@
 interface BadgeProps {
-  color?: string;
-  shape?: 'square' | 'round' | 'circle';
-  className?: string;
+  color?: string
+  shape?: 'square' | 'round' | 'circle'
+  className?: string
   //   size?: 'sm' | 'md' | 'lg'
-  onClick?: () => void;
+  onClick?: () => void
 }
 
-export const Badge: React.FC<BadgeProps> = ({
-  children,
-  className,
-  color = 'bg-gray-500',
-  shape = 'round'
-}) => {
+export const Badge: React.FC<BadgeProps> = ({ children, className, color = 'bg-gray-500', shape = 'round' }) => {
   const ShapeStyles = {
     square: '',
     round: 'rounded-lg',
     circle: 'rounded-full'
-  };
+  }
 
   return (
     <span
@@ -25,5 +20,5 @@ export const Badge: React.FC<BadgeProps> = ({
     >
       {children}
     </span>
-  );
-};
+  )
+}

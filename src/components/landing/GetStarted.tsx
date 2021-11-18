@@ -10,14 +10,7 @@ export type Props = {
   secondaryLinkUrl: string
   pushDownFooter: boolean
 }
-const GetStarted: React.FC<Props> = ({
-  text,
-  primaryLinkText,
-  primaryLinkUrl,
-  secondaryLinkText,
-  secondaryLinkUrl,
-  pushDownFooter
-}) => {
+const GetStarted: React.FC<Props> = ({ text, primaryLinkText, primaryLinkUrl, secondaryLinkText, secondaryLinkUrl, pushDownFooter }) => {
   const Styles = {
     Container: 'relative',
     ContentWithPaddingXl: 'max-w-screen-xl mx-auto py-20 lg:py-24',

@@ -19,13 +19,7 @@ export type Props = {
   primaryButtonText: string
 }
 
-const ThreePlansWithHalfPrimaryBackground: React.FC<Props> = ({
-  subheading,
-  heading,
-  description,
-  plans,
-  primaryButtonText
-}) => {
+const ThreePlansWithHalfPrimaryBackground: React.FC<Props> = ({ subheading, heading, description, plans, primaryButtonText }) => {
   const Styles = {
     Container: 'relative bg-primary -mx-10 px-10',
     ContentWithPaddingXl:
@@ -34,8 +28,7 @@ const ThreePlansWithHalfPrimaryBackground: React.FC<Props> = ({
     Subheading: 'text-bg mb-4',
     Heading: 'text-bg text-center w-full',
     Description: 'mt-4 text-bg max-w-xl w-full text-center',
-    PlansContainer:
-      'mt-16 flex flex-col items-center lg:flex-row lg:items-stretch lg:justify-between text-gray-900 font-medium',
+    PlansContainer: 'mt-16 flex flex-col items-center lg:flex-row lg:items-stretch lg:justify-between text-gray-900 font-medium',
     Plan: 'w-full max-w-sm bg-bg rounded-lg shadow-lg py-10 px-6 sm:px-10 lg:px-6 lg:py-10 xl:p-10 mx-3 flex flex-col justify-between mt-16 first:mt-0 lg:mt-0 shadow-raised',
     PlanHeaderNameAndFeaturedContainer: 'flex flex-wrap flex-col sm:flex-row justify-between items-center',
     PlanHeaderName: 'uppercase font-bold tracking-wider mr-3',

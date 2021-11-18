@@ -45,18 +45,8 @@ const SideNav = ({ baseUrl, styles, listItems, header }: props) => {
           <li key={listItem.name}>
             <Link
               className={`${Styles.listItem} ${
-                (pathname === baseUrl
-                  ? currPath === listItem.path
-                  : i === 0
-                  ? false
-                  : currPath.includes(listItem.path)) && selectedBg
-              } ${
-                (pathname === baseUrl
-                  ? currPath === listItem.path
-                  : i === 0
-                  ? false
-                  : currPath.includes(listItem.path)) && styles?.selectedText
-              }`}
+                (pathname === baseUrl ? currPath === listItem.path : i === 0 ? false : currPath.includes(listItem.path)) && selectedBg
+              } ${(pathname === baseUrl ? currPath === listItem.path : i === 0 ? false : currPath.includes(listItem.path)) && styles?.selectedText}`}
               type='primary-nl'
               icon={<listItem.icon />}
               button

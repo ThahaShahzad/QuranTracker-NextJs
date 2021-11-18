@@ -5,14 +5,32 @@ import illustration from 'public/images/login-illustration.svg'
 import logo from 'public/images/logo.svg'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
-import { signIn } from 'next-auth/client'
+import { SignInSchema, SignInType } from 'lib/models/auth'
+import { joiResolver } from '@hookform/resolvers/joi/dist/joi'
+import { useAuth } from 'lib/contexts/auth'
+import { useState } from 'react'
 
 const SignIn = () => {
-  const { register, handleSubmit } = useForm()
+  const { signin } = useAuth()
+  const [authError, setAuthError] = useState(null)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<SignInType>({
+    resolver: joiResolver(SignInSchema)
+  })
   const router = useRouter()
-  const isError = router.query.error
-  const onSubmit = async (data: any) => {
-    signIn('credentials', data)
+  const onSubmit = async (formData: SignInType) => {
+    try {
+      const res = await signin(formData)
+      if (res) {
+        router.push('/dash')
+      }
+    } catch (error: any) {
+      setAuthError(error)
+      console.error(error)
+    }
   }
   const Styles = {
     Container: 'h-screen bg-primary font-medium flex justify-center overflow-hidden',
@@ -53,10 +71,11 @@ const SignIn = () => {
           <div className={Styles.MainContent}>
             <h3>Sign In To QuranTracker</h3>
             <form onSubmit={handleSubmit(onSubmit)} className={Styles.FormContainer}>
-              <TextInput name='username' placeholder='Username' register={register} />
-              <PasswordInput name='password' placeholder='Password' register={register} />
+              <TextInput type='email' label='Email' name='email' placeholder='Email' register={register} />
+              {errors?.email && <p className='text-red-500'>Invalid Email</p>}
+              <PasswordInput name='password' label='Password' placeholder='Password' register={register} />
               <Button submitType='submit'>Login </Button>
-              {isError && <p className='text-red-500'>Invalid Username or password, please try again</p>}
+              {authError && <p className='text-red-500'>Invalid Email or password, please try again</p>}
             </form>
             <p className='mt-6 text-xs  text-center'>
               <Link type='primary-i' to='/auth/forgotpassword'>
@@ -67,12 +86,6 @@ const SignIn = () => {
             <Link type='primary-i' to='/auth/signup'>
               Sign up
             </Link>
-            {/* <div className='flex flex-col justify-center items-center gap-4 mt-4'>
-              <Link type='primary-i' to='/auth/signup'>
-                <Button>Email</Button>
-              </Link>
-              <Button onClick={() => signIn('github')}> Github</Button>
-            </div> */}
           </div>
         </div>
         <div className={Styles.IllustrationContainer}>

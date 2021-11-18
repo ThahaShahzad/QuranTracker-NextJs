@@ -1,11 +1,9 @@
 import Head from 'next/head'
-import TeacherHome from 'components/dash/Home'
+import TeacherHome from 'components/dash/home/Home'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import DashLayout from 'components/layouts/DashLayout'
-
-import { GetServerSidePropsContext } from 'next'
-import { getSession } from 'next-auth/client'
-import { DbUser } from 'lib/models/dbuser'
+// import { withPageAuthFromDash } from 'lib/middleware/pageMiddleware'
+// import { GetServerSidePropsContext } from 'next'
 
 const Home = () => {
   return (
@@ -20,17 +18,10 @@ const Home = () => {
     </>
   )
 }
-export async function getServerSideProps({ req, res }: GetServerSidePropsContext) {
-  const session = (await getSession({ req })) as DbUser
-  if (!session) {
-    res.writeHead(307, { Location: '/auth/signin' })
-    res.end()
-    return { props: {} }
-  }
-  return {
-    props: { session } // will be passed to the page component as props
-  }
-}
+// export const getServerSideProps = withPageAuthFromDash((ctx: GetServerSidePropsContext) => {
+//   return { props: {} }
+// })
+
 Home.getLayout = DashLayout
 
 export default Home

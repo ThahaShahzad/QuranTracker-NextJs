@@ -1,7 +1,8 @@
 import Joi from 'joi'
 
 export interface AdminSignUpType {
-  userName: string
+  firstName: string
+  lastName: string
   email: string
   password: string
 }
@@ -11,7 +12,8 @@ const PasswordSchema = Joi.string()
   .required()
 
 export const AdminSignUpSchema = Joi.object({
-  userName: Joi.string().min(6).max(32).alphanum().lowercase().required(),
+  firstName: Joi.string().alphanum().required(),
+  lastName: Joi.string().alphanum().required(),
   email: Joi.string()
     .email({ tlds: { allow: false } })
     .lowercase()

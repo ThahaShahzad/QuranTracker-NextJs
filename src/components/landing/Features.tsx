@@ -17,8 +17,7 @@ const ThreeColSimple: React.FC<Props> = ({ cards, heading, description }) => {
   const Styles = {
     Container: 'relative',
     ContentWithPaddingXl: 'py-20 lg:py-24',
-    ThreeColumnContainer:
-      'mt-10 flex flex-col items-center lg:items-stretch lg:flex-row flex-wrap lg:justify-center max-w-screen-xl mx-auto',
+    ThreeColumnContainer: 'mt-10 flex flex-col items-center lg:items-stretch lg:flex-row flex-wrap lg:justify-center max-w-screen-xl mx-auto',
     Column: 'lg:w-1/3',
     Subheading: 'font-bold text-primary text-center mb-3',
     Heading: 'text-center',

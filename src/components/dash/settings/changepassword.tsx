@@ -1,4 +1,4 @@
-import { joiResolver } from '@hookform/resolvers/joi'
+import { joiResolver } from '@hookform/resolvers/joi/dist/joi'
 import { Button, Link, PasswordInput } from 'components/custom'
 import { Axios } from 'lib/api/axios'
 import { ChangePasswordSchema, ChangePasswordType } from 'lib/models/dash/settings/changepassword'
@@ -39,15 +39,11 @@ const Changepassword = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <PasswordInput name='oldPassword' label='Old password' placeholder='Old password' register={register} />
           {errors?.oldPassword && (
-            <p className='text-red-500'>
-              Password must contain minimum eight characters, at least one letter, one number and one special character
-            </p>
+            <p className='text-red-500'>Password must contain minimum eight characters, at least one letter, one number and one special character</p>
           )}
           <PasswordInput name='newPassword' label='New password' placeholder='New password' register={register} />
           {errors?.newPassword && (
-            <p className='text-red-500'>
-              Password must contain minimum eight characters, at least one letter, one number and one special character
-            </p>
+            <p className='text-red-500'>Password must contain minimum eight characters, at least one letter, one number and one special character</p>
           )}
           <Button submitType='submit' className='mt-4' disabled={passError}>
             Change

@@ -1,0 +1,15 @@
+mutation AdminApplication($id: ID!, $input: UserInput!) {
+  updateUser(id: $id, data: $input) {
+    _id
+    uid
+    email
+    school {
+      schoolName
+      email
+      state
+      city
+      phone
+      type
+    }
+  }
+}

@@ -31,9 +31,7 @@ const VerticalWithAlternateImageAndText: React.FC<Props> = ({ cards }) => {
       <div className={Styles.SingleColumn}>
         <div className={Styles.HeadingInfoContainer}>
           <h2 className={Styles.HeadingTitle}>Popular Events</h2>
-          <p className={Styles.HeadingDescription}>
-            Here are some of the most popular events in New York City curated by professionals.
-          </p>
+          <p className={Styles.HeadingDescription}>Here are some of the most popular events in New York City curated by professionals.</p>
         </div>
 
         <div className={Styles.Content}>

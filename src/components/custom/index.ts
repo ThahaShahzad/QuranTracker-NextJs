@@ -5,17 +5,4 @@ import { Link } from './Link'
 import { TextInput, PasswordInput, NumberInput, CheckBox, Radio, Select } from './Inputs'
 import SideNav from './SideNav'
 
-export {
-  Badge,
-  Button,
-  FloatingButton,
-  ThemeToggleFloatingButton,
-  Link,
-  SideNav,
-  TextInput,
-  PasswordInput,
-  NumberInput,
-  CheckBox,
-  Radio,
-  Select
-}
+export { Badge, Button, FloatingButton, ThemeToggleFloatingButton, Link, SideNav, TextInput, PasswordInput, NumberInput, CheckBox, Radio, Select }

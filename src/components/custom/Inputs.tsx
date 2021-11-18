@@ -88,10 +88,7 @@ const PasswordInput = ({
   }
   return (
     <div className='flex flex-col'>
-      <label
-        className={`underline hover:cursor-pointer ${visibility ? 'text-red-600' : 'text-font'}`}
-        onClick={() => setVisibility(!visibility)}
-      >
+      <label className={`underline hover:cursor-pointer ${visibility ? 'text-red-600' : 'text-font'}`} onClick={() => setVisibility(!visibility)}>
         {label}
       </label>
       <input
@@ -113,6 +110,8 @@ interface NumberInputProps {
   label?: string
   placeholder?: string
   required?: boolean
+  min?: number
+  max?: number
   register: UseFormRegister<any>
 }
 const NumberInput = ({
@@ -123,6 +122,8 @@ const NumberInput = ({
   label,
   placeholder = name,
   required = true,
+  min,
+  max,
   register
 }: NumberInputProps) => {
   const sizeStyles = {
@@ -145,6 +146,8 @@ const NumberInput = ({
       <input
         className={`${styles[styleType]} ${sizeStyles[size]} ${shapeStyles[shape]}`}
         type='number'
+        min={min}
+        max={max}
         placeholder={placeholder}
         {...register(name, { required })}
         required={required}
@@ -204,16 +207,7 @@ interface SelectProps {
   required?: boolean
   register: UseFormRegister<any>
 }
-const Select = ({
-  styleType = 'primary',
-  size = 'md',
-  shape = 'round',
-  name,
-  options,
-  label,
-  required = true,
-  register
-}: SelectProps) => {
+const Select = ({ styleType = 'primary', size = 'md', shape = 'round', name, options, label, required = true, register }: SelectProps) => {
   const sizeStyles = {
     sm: 'text-sm sm:text-base px-2 py-1',
     md: 'text-base sm:text-xl px-4 py-2',
@@ -231,11 +225,7 @@ const Select = ({
   return (
     <div>
       <label className='mb-2'>{label}</label>
-      <select
-        defaultValue='default'
-        className={`${styles[styleType]} ${sizeStyles[size]} ${shapeStyles[shape]}`}
-        {...register(name, { required })}
-      >
+      <select defaultValue='default' className={`${styles[styleType]} ${sizeStyles[size]} ${shapeStyles[shape]}`} {...register(name, { required })}>
         <option value='default' disabled>
           Select...
         </option>

@@ -50,8 +50,7 @@ const BottomNav = ({
     logo: 'flex items-center',
     logoText: 'ml-2',
     list: 'flex gap-4',
-    listItem:
-      'flex flex-col items-center justify-center rounded-3xl xl:justify-start p-2 xs:p-4 sm:py-2 sm:px-4 xl:gap-2 xl:px-2 xl:py-4 2xl:p-4',
+    listItem: 'flex flex-col items-center justify-center rounded-3xl xl:justify-start p-2 xs:p-4 sm:py-2 sm:px-4 xl:gap-2 xl:px-2 xl:py-4 2xl:p-4',
     listItemIcon: 'text-bg',
     listItemText: 'text-bg hidden sm:block',
     listItemSelected: 'border-2 border-bg',

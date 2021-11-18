@@ -26,8 +26,7 @@ const ContactUs = ({
     TwoColumn: 'flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24',
     Column: 'w-full max-w-md mx-auto md:max-w-none md:mx-0',
     ImageColumn: 'w-full max-w-md mx-auto md:max-w-none md:mx-0 md:w-5/12 flex-shrink-0 h-80 md:h-auto',
-    TextColumn:
-      'w-full max-w-md mx-auto md:max-w-none md:mx-0 md:w-7/12 mt-16 md:mt-0 md:mr-12 lg:mr-16 md:order-first',
+    TextColumn: 'w-full max-w-md mx-auto md:max-w-none md:mx-0 md:w-7/12 mt-16 md:mt-0 md:mr-12 lg:mr-16 md:order-first',
     Image: 'rounded bg-contain bg-no-repeat bg-center h-full',
     TextContent: 'lg:py-8 text-center md:text-left',
     Subheading: 'font-bold text-primary text-center md:text-left',

@@ -52,8 +52,7 @@ export const LandingPageDetails = {
     ],
     heading: 'Amazing Features',
     subheading: '',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
   },
   MainFeatures: {
     cards: [
@@ -78,8 +77,7 @@ export const LandingPageDetails = {
       },
 
       {
-        imageSrc:
-          'https://images.unsplash.com/photo-1509824227185-9c5a01ceba0d?ixlib=rb-1.2.1&auto=format&fit=crop&w=658&q=80',
+        imageSrc: 'https://images.unsplash.com/photo-1509824227185-9c5a01ceba0d?ixlib=rb-1.2.1&auto=format&fit=crop&w=658&q=80',
         subtitle: 'Exclusive',
         title: 'Lollapalooza, Manhattan',
         description:
@@ -91,8 +89,7 @@ export const LandingPageDetails = {
   Pricing: {
     subheading: '',
     heading: 'Affordable Pricing',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     plans: [
       {
         name: 'Basic',

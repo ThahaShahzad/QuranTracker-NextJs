@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "qurantracker-825ac",
+  "private_key_id": "7d97713cabf4e7bdab8ee143c1b76b8db6b4dd14",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCn9yN2EBE7p9jg\nyg2Rk3HHqLtF1sUEB9IHSpBsnWqhHSBfzsMGnLYOS+P1GmZJAMFlxk4uEPvKOC2u\nnha8xRlKPK1PB6hCuFD7jZg65J+1xom9NhFf1gp3CfbAod/ULZZ0nsIDY0qCtLfV\nLDDqatT1yl7aH0SJXE8RyM9goA41jzO8z9uTmKH78IdHzC96jZpji200nQrOFNjY\nzNOBBgKONwfKP3aVhs4aaLeW2xd/Cc1o/rEWz0rgafw3Cr+tQzimwVFBwA25UbWd\n+caYCA6qqS04AI/7aZTQcVhn/pQvihKa6mgClQtprVCbXNhUYPjYqybdXc3g/4wM\nk6YHMwzRAgMBAAECggEAAdR1dHHUXjwD5t8Mqstab/xsneQrHVIgfafYTvagFMVG\ndwS/pzDJ4vn8r8zr1FvHv54bd/EDbT6TcNWUFdZn4iErGjNRJ/juGO9/+xRGkSpq\nkb8nDU49qvJW195rm9orS3X3UyYfx7DEV/Q1TDiBvXPI+MNiccSpr93qNHlJ7ldu\ngP6It4LzKEWRgzzQFe5ItJvvNeVce4sx3RSh4FL28IBkyXNWSjYxpmydwkyBtIG1\ntkA2LpNSSOGd6VHsh8mo95NOCygBWDIMmQ8Q7DbCFjMpmMC85yh7StaAuDuVQ5j0\nGtBFkRabit76+GBWiXNm73mADwrlaq1Y6WKsQDAPYQKBgQDrL3M7MMx+kKesmwYg\nx2tBkDt8lfH+3+3PtTIdri23/thWgAXB9phhLRXtHOfVD3/7qQiU2Kwn4W2G17BW\nWLAKJIk1x1mGWdEuEoFsy74Q9M4tTMpG2w4aJc52sZmjdJzRmjFrY/3BN4RpQhoB\nuA+GuTlE9Dm0/4PW5X9hJyIcVQKBgQC21LLHzzJxJL/3yVcm0Gb1jBdazzmcdRSa\nm+WpSkwBm8ypdTTHbUdk0ULzBa/aGEN3aTik7JFCeaSwjgXZTJ5iab2fQbuuvahm\n4OyGg/pJYMqUYth4fcyeDDvHojUTcbS1+LMdHiuAKhWZargc9fnSnX71E9Lm1nP3\nlDmwITWqjQKBgEnoMGsSa8D+TmL0mJlmcbM50yfUqyawUjhqtaQUH3Pp1yxfsO+C\nQeKP24sXAVe4NjzsorC74mXp9pRgZZ7M4g1d6+yFiAGragvzbs60vDbx53Te49Ye\ncrEO3nH4X9K5C6rmrM8VriGxA6BcUHXn1KE+xduAcD4L6e93UW9Db/m9AoGAIBCx\nwkVejWVqnaScOlx2kj4donmRmxUVpgANiWFUbzvJ6zZ5KTjLOq1Q1pp6uv9iZcD4\nhERRPZ1j+usNr4y2goAVF6dJqV3t+Q0droHbFZ96KAgl+wvlJRr0KRETyfM5RGj3\n0PWHn5TB8QQ8gifJxtyEdasiZAXclOFUNMW+SckCgYEAmDoCE2xXw5fBgCigPdG3\na7XQ4c5dfFpiVjGN8AKTxmQWyPcEXEsFjUCF6ZrUBmxMR7c169amIpLrZjKJ2pR4\n3MSryLPJPoZJ+8wdsj8PoSjlgWljwfAlcKObSI7lC6JJ2YNphKDiwrQf3aiw0CNL\nuJmJYs7Z+lOu2xx0rI/0Ybk=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-fvb5z@qurantracker-825ac.iam.gserviceaccount.com",
+  "client_id": "113173908876600430883",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fvb5z%40qurantracker-825ac.iam.gserviceaccount.com"
+}

@@ -1,4 +1,5 @@
 import Joi from 'joi'
+import { SchoolType } from 'lib/graphql/generated'
 
 export interface AdminApplicationType {
   schoolName: string
@@ -55,7 +56,7 @@ export interface AdminApplicationType {
     | 'West Virginia'
     | 'Vermont'
   city: string
-  type: 'Islamic' | 'Masjid' | 'Other'
+  type: SchoolType
   email: string
   phone: string
 }

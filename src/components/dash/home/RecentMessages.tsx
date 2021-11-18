@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next'
+// import { GetStaticProps } from 'next'
 
 const RecentMessages = () => {
   return (
@@ -9,12 +9,12 @@ const RecentMessages = () => {
   )
 }
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
-  return {
-    props: {
-      data: null
-    }
-  }
-}
+// export const getStaticProps: GetStaticProps = async (ctx) => {
+//   return {
+//     props: {
+//       data: null
+//     }
+//   }
+// }
 
 export default RecentMessages

@@ -24,7 +24,7 @@ const WeekCalender = () => {
       </div>
       <div className='hidden sm:flex  w-full h-48 p-2'>
         {week.map((day, i) => (
-          <div key={day} className='text-center py-2 w-full'>
+          <div key={i} className='text-center py-2 w-full'>
             <div className='hidden lg:block border-b border-font'>
               {weekDays[i]} - {day}
             </div>
@@ -37,7 +37,7 @@ const WeekCalender = () => {
       </div>
       <div className='sm:hidden flex p-2'>
         {week.slice(1, -1).map((day, i) => (
-          <div key={day} className='text-center py-2 w-full'>
+          <div key={i} className='text-center py-2 w-full'>
             <div className='lg:hidden border-b border-font'>{weekDaysLetter[i]}</div>
             <div className='m-2 bg-green-400 rounded-lg h-full flex justify-center items-center'>memo</div>
             <div className='m-2 bg-blue-400 rounded-lg h-full flex justify-center items-center'>Resvison</div>

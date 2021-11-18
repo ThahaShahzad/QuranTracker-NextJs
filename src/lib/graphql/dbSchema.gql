@@ -1,0 +1,55 @@
+type User @collection(name: "user") {
+  uid: ID
+  firstName: String
+  lastName: String
+  email: String @unique
+  emailVerified: Boolean
+
+  submittedApplication: Boolean
+  isActivated: Boolean
+  initalAccountCreation: Boolean
+  isActive: Boolean
+  accType: userAccType
+  school: School!
+  classes: [Classes] @relation
+  children: [Student] @relation
+  createdAt: Time
+  updatedAt: Time
+}
+enum userAccType {
+  Admin
+  Teacher
+  Parent
+}
+enum SchoolType {
+  Islamic
+  Masjid
+  Other
+}
+type School @collection(name: "school") {
+  schoolName: String
+  email: String
+  state: String
+  city: String
+  phone: String
+  type: SchoolType
+  users: [User!] @relation
+}
+type Classes @collection(name: "classes") {
+  name: String
+  teacher: User!
+  students: [Student!] @relation
+}
+type Student @collection(name: "student") {
+  studentId: ID!
+  parent: User!
+  parentEmail: String
+  firstName: String
+  lastName: String
+  age: Int
+  grade: String
+  classes: [Classes!] @relation
+}
+type Query {
+  findUserByUID(uid: ID!): User
+}

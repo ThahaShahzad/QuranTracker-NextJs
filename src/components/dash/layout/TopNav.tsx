@@ -1,19 +1,19 @@
 import { Link } from 'components/custom'
-import AvatarDropDown from 'components/custom/AvatarDropDown'
+import { useAuth } from 'lib/contexts/auth'
+// import AvatarDropDown from 'components/custom/AvatarDropDown'
 import { useDate } from 'lib/hooks/useDate'
-import { DbUser } from 'lib/models/dbuser'
-import { useSession } from 'next-auth/client'
+// import { DbUser } from 'lib/models/dbuser'
+// import { useSession } from 'next-auth/client'
 import Image from 'next/image'
 
 const TopNav = () => {
   const { time, date, wish } = useDate()
-  const [{ dbuser }, loading] = useSession() as [DbUser, boolean]
+  const { user } = useAuth()
   return (
     <nav className='flex justify-between bg-bg p-2 lg:p-4'>
       <div className='flex flex-col lg:flex-row items-center'>
         <h4 className='lg:mr-2 '>Asalamualakum </h4>
-        {/* <h4 className=''>daha</h4> */}
-        {!loading && dbuser?.userName}
+        {user?.firstName}
       </div>
 
       <div className='flex items-center gap-4'>
@@ -24,6 +24,7 @@ const TopNav = () => {
           {/* <Image src={'/images/male-avatar.png'} className='rounded-full' alt='male avatar' width='50' height='50' /> */}
           <Image
             src='https://i7.uihere.com/icons/304/187/640/person-cfad3fe4aead102f4161896324dd8c29.png'
+            alt='Profile pic'
             height='50%'
             width='50%'
             className='rounded-full'

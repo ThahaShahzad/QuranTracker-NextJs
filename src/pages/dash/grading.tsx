@@ -1,5 +1,4 @@
 import DashLayout from 'components/layouts/DashLayout'
-import { GetStaticProps } from 'next'
 
 const Grading = () => {
   return (
@@ -7,14 +6,6 @@ const Grading = () => {
       <h2>Grading</h2>
     </main>
   )
-}
-
-export const getStaticProps: GetStaticProps = async (ctx) => {
-  return {
-    props: {
-      data: null
-    }
-  }
 }
 
 Grading.getLayout = DashLayout

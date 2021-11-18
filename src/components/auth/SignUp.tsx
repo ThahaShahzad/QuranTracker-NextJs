@@ -5,13 +5,17 @@ import illustration from 'public/images/login-illustration.svg'
 import logo from 'public/images/logo.svg'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
-import { useMutation } from 'react-query'
-import { SignUpNewUser } from 'lib/api/auth/queryFunctions/signup'
-import { joiResolver } from '@hookform/resolvers/joi'
+import { joiResolver } from '@hookform/resolvers/joi/dist/joi'
 import { AdminSignUpSchema, AdminSignUpType } from 'lib/models/auth'
+import { useAuth } from 'lib/contexts/auth'
+import { useState } from 'react'
+import { useCreateAdminMutation, UserAccType, UserInput } from 'lib/graphql/generated'
+import graphqlRequestClient from 'lib/config/clients/fauna'
 
 const SignUp = () => {
-  const { mutateAsync, isError } = useMutation(SignUpNewUser)
+  const { signup } = useAuth()
+  const [authError, setAuthError] = useState(null)
+  const { mutateAsync } = useCreateAdminMutation(graphqlRequestClient)
   const {
     register,
     handleSubmit,
@@ -22,11 +26,30 @@ const SignUp = () => {
   const router = useRouter()
   const onSubmit = async (formData: AdminSignUpType) => {
     try {
-      const res = await mutateAsync(formData)
+      const res = await signup({ email: formData.email, password: formData.password })
+      const date = new Date().toISOString()
       if (res) {
-        router.push('/auth/signin')
+        const userDoc: UserInput = {
+          uid: res.uid,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          emailVerified: false,
+          accType: UserAccType.Admin,
+          initalAccountCreation: false,
+          isActivated: false,
+          isActive: true,
+          submittedApplication: false,
+          createdAt: date,
+          updatedAt: date
+        }
+        const res1 = await mutateAsync({ input: userDoc })
+        if (res1) {
+          router.push('/auth/signin')
+        }
       }
-    } catch (error) {
+    } catch (error: any) {
+      setAuthError(error)
       console.error(error)
     }
   }
@@ -69,21 +92,22 @@ const SignUp = () => {
           <div className={Styles.MainContent}>
             <h3 className='text-bg'>Sign Up To QuranTracker</h3>
             <form autoComplete='on' onSubmit={handleSubmit(onSubmit)} className={Styles.FormContainer}>
-              <TextInput name='userName' label='Username' placeholder='Username' register={register} />
-              {errors?.userName && <p className='text-red-500'>Invalid Username</p>}
+              <TextInput name='firstName' label='First name' placeholder='First name' register={register} />
+              {errors?.firstName && <p className='text-red-500'>Invalid name</p>}
+              <TextInput name='lastName' label='Last name' placeholder='Last name' register={register} />
+              {errors?.lastName && <p className='text-red-500'>Invalid name</p>}
               <TextInput name='email' label='Email' placeholder='Email' register={register} />
-              {errors?.email && <p className='text-red-500'>Invalid Username</p>}
+              {errors?.email && <p className='text-red-500'>Invalid Email</p>}
               <PasswordInput name='password' label='Password' placeholder='Password' register={register} />
               {errors?.password && (
                 <p className='text-red-500'>
-                  Password must contain minimum eight characters, at least one letter, one number and one special
-                  character
+                  Password must contain minimum eight characters, at least one letter, one number and one special character
                 </p>
               )}
               <Button submitType='submit' type='primary-d'>
                 Sign Up
               </Button>
-              {isError && <p className='text-red-500'>Username or email is already taken, please try again</p>}
+              {authError && <p className='text-red-500'>Email is already taken, please try again</p>}
             </form>
             <p className='mt-8 text-sm text-bg text-center'>
               Already have an account?{' '}

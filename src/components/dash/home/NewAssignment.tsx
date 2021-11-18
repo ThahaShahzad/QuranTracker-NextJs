@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next'
+// import { GetStaticProps } from 'next'
 import { Button, Link } from 'components/custom/index'
 
 const NewAssignment = () => {
@@ -32,12 +32,12 @@ const NewAssignment = () => {
   )
 }
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
-  return {
-    props: {
-      data: null
-    }
-  }
-}
+// export const getStaticProps: GetStaticProps = async (ctx) => {
+//   return {
+//     props: {
+//       data: null
+//     }
+//   }
+// }
 
 export default NewAssignment
