@@ -19,7 +19,7 @@ const middleware = async (req: NextRequest, ev: NextFetchEvent) => {
     if (token) return NextResponse.next()
   } catch (error) {
     // return NextResponse.next()
-    NextResponse.redirect('/auth/signin')
+    return NextResponse.redirect('/auth/signin')
   }
 }
 
