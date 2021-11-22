@@ -1,0 +1,45 @@
+mutation createParent($input: UserInput!) {
+  createUser(data: $input) {
+    _id
+    uid
+    firstName
+    lastName
+    email
+    emailVerified
+    accType
+    school
+    children
+    isActive
+    createdAt
+    updatedAt
+  }
+}
+# [
+#     {
+#       uid: "GFUOhuoZUocf8f99DABKYhQsGal2",
+#       firstName: "Arif",
+#       lastName: "Khan",
+#       email: "qariarif@gmail.com",
+#       emailVerified: false,
+#       accType: "Teacher",
+#       school: "314974727558922307"
+#     },
+#     {
+#       uid: "GFUOhuoZUocf8fg8sABKYhQsGal2",
+#       firstName: "Main",
+#       lastName: "Alquda",
+#       email: "drmain@gmail.com",
+#       emailVerified: false,
+#       accType: "Teacher",
+#       school: "314974727558922307"
+#     },
+#     {
+#       uid: "GFUOhuoZUocf8f99DABKY0f4Gal2",
+#       firstName: "Hammad",
+#       lastName: "Gazali",
+#       email: "gazali@gmail.com",
+#       emailVerified: false,
+#       accType: "Teacher",
+#       school: "314974727558922307"
+#     }
+#   ]

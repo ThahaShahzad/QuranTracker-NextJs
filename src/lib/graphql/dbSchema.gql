@@ -53,3 +53,127 @@ type Student @collection(name: "student") {
 type Query {
   findUserByUID(uid: ID!): User
 }
+type Mutation {
+  CreateManyTeachers(data: [UserInput]!): User! @resolver(name: "CreateManyTeachers")
+  CreateManyParents(data: [UserInput]!): User! @resolver(name: "CreateManyParents")
+  CreateManyStudents(data: [StudentInput]!): Student! @resolver(name: "CreateManyStudents")
+  CreateManyClasses(data: [ClassesInput]!): Classes! @resolver(name: "CreateManyClasses")
+}
+
+# input CreateManyTeachersInput {
+#   uid: ID
+#   firstName: String
+#   lastName: String
+#   email: String
+#   emailVerified: Boolean
+#   isActive: Boolean
+#   accType: userAccType
+#   school: UserSchoolRelation
+#   createdAt: Time
+#   updatedAt: Time
+# }
+# input CreateManyParentsInput {
+#   uid: ID
+#   firstName: String
+#   lastName: String
+#   email: String
+#   emailVerified: Boolean
+#   isActive: Boolean
+#   accType: userAccType
+#   school: UserSchoolRelation
+#   createdAt: Time
+#   updatedAt: Time
+# }
+# input CreateManyStudentsInput {
+#   studentId: ID
+#   parent: StudentParentRelation
+#   parentEmail: String
+#   firstName: String
+#   lastName: String
+#   age: Int
+#   grade: String
+# }
+# input CreateManyClassesInput {
+#   name: String
+#   teacher: ClassesTeacherRelation
+#   students: ClassesStudentsRelation
+# }
+
+input UserInput {
+  uid: ID
+  firstName: String
+  lastName: String
+  email: String
+  emailVerified: Boolean
+  submittedApplication: Boolean
+  isActivated: Boolean
+  initalAccountCreation: Boolean
+  isActive: Boolean
+  accType: userAccType
+  school: UserSchoolRelation
+  classes: UserClassesRelation
+  children: UserChildrenRelation
+  createdAt: Time
+  updatedAt: Time
+}
+input SchoolInput {
+  schoolName: String
+  email: String
+  state: String
+  city: String
+  phone: String
+  type: SchoolType
+  users: SchoolUsersRelation
+}
+input StudentInput {
+  parent: StudentParentRelation
+  parentEmail: String
+  firstName: String
+  lastName: String
+  age: Int
+  grade: String
+  classes: StudentClassesRelation
+}
+input ClassesInput {
+  name: String
+  teacher: ClassesTeacherRelation
+  students: ClassesStudentsRelation
+}
+
+input UserSchoolRelation {
+  create: SchoolInput
+  connect: ID
+}
+input UserChildrenRelation {
+  create: [StudentInput]
+  connect: [ID]
+  disconnect: [ID]
+}
+input UserClassesRelation {
+  create: [ClassesInput]
+  connect: [ID]
+  disconnect: [ID]
+}
+input SchoolUsersRelation {
+  create: [UserInput]
+  connect: [ID]
+  disconnect: [ID]
+}
+input StudentParentRelation {
+  create: UserInput
+  connect: ID
+}
+input ClassesStudentsRelation {
+  create: [StudentInput]
+  connect: [ID]
+  disconnect: [ID]
+}
+input ClassesTeacherRelation {
+  create: UserInput
+  connect: ID
+}
+input StudentClassesRelation {
+  create: [ClassesInput]
+  connect: [ID]
+  disconnect: [ID]
+}

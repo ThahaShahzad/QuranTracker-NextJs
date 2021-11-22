@@ -4,7 +4,7 @@ export interface AccountCreationContextType {
   form: form
   setForm: React.Dispatch<React.SetStateAction<form>>
 }
-interface form {
+export interface form {
   Parents?: {
     'First Name': string
     'Last Name': string

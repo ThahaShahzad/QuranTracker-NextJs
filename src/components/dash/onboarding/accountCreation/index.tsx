@@ -1,15 +1,30 @@
 import { Button } from 'components/custom'
+import { AccountCreationPost } from 'lib/api/auth/queryFunctions/accountCreation'
 import { useAccountCreationContext } from 'lib/contexts/accountCreation'
 import { StudentAccountType } from 'lib/models/auth/accountCreation'
 import Head from 'next/head'
 import { useState } from 'react'
+import { useMutation } from 'react-query'
 import ClassTable from './classTable'
 import InputTable from './inputTable'
 
 const AccountCreation = () => {
   const [nextStep, setNextStep] = useState(false)
   const { form } = useAccountCreationContext()
+  const { mutateAsync, isError } = useMutation(AccountCreationPost)
   const classHeaders = ['Name', 'Teacher Email', 'Students']
+
+  const onSubmit = async () => {
+    try {
+      const res = await mutateAsync(form)
+
+      if (res) {
+        console.log(res)
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
   return (
     <>
       <Head>
@@ -31,7 +46,7 @@ const AccountCreation = () => {
           </>
         ) : (
           <>
-            <Button>Create Accounts</Button>
+            <Button onClick={onSubmit}>Create Accounts</Button>
             {form.Classes?.map((classObject) => (
               <ClassTable
                 key={classObject.Name}

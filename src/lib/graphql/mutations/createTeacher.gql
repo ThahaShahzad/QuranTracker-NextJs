@@ -1,0 +1,16 @@
+mutation createTeacher($input: UserInput!) {
+  createUser(data: $input) {
+    _id
+    uid
+    firstName
+    lastName
+    email
+    emailVerified
+    accType
+    school
+    classes
+    isActive
+    createdAt
+    updatedAt
+  }
+}
