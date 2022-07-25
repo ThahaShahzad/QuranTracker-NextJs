@@ -1,0 +1,6 @@
+query Root {
+  findUserByID(uid: "") {
+    uid
+    firstName
+  }
+}

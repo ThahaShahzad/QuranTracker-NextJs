@@ -1,10 +1,9 @@
-import { Button, Link } from 'components/custom'
+import { Button, Link, ThemeToggleFloatingButton } from 'components/custom'
 import { useAuth } from 'lib/contexts/auth'
 import { useRouter } from 'next/router'
 
 const Settings = () => {
   const { user, signout } = useAuth()
-  console.log(user)
   const router = useRouter()
   const handleSignOut = async () => {
     router.push('/')
@@ -29,6 +28,7 @@ const Settings = () => {
           <input type='text' value={dbuser?.school.schoolName} disabled />
         </div>
       </section> */}
+      <ThemeToggleFloatingButton />
       <Link to='/dash/settings/changepassword' type='primary-nl' className='text-bg'>
         <Button submitType='button' className='my-8'>
           Change Password

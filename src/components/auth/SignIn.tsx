@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 import { Link, Button, TextInput, PasswordInput } from 'components/custom'
-import illustration from 'public/images/login-illustration.svg'
+import illustration from 'public/images/quran-signin.jpg'
 import logo from 'public/images/logo.svg'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
@@ -57,9 +57,8 @@ const SignIn = () => {
     SubmitButtonIcon: 'w-6 h-6 -ml-2',
     SubmitButtonText: 'ml-3',
     IllustrationContainer: 'sm:rounded-r-lg flex-1 bg-green-100 text-center hidden lg:flex justify-center ',
-    IllustrationImage: 'm-auto w-full max-w-lg '
+    IllustrationImage: 'm-auto w-full max-w-3xl'
   }
-
   return (
     <div className={Styles.Container}>
       <div className={Styles.Content}>
@@ -71,9 +70,9 @@ const SignIn = () => {
           <div className={Styles.MainContent}>
             <h3>Sign In To QuranTracker</h3>
             <form onSubmit={handleSubmit(onSubmit)} className={Styles.FormContainer}>
-              <TextInput type='email' label='Email' name='email' placeholder='Email' register={register} />
+              <TextInput type='email' label='Email' labelColor='text-primary' name='email' placeholder='Email' register={register} />
               {errors?.email && <p className='text-red-500'>Invalid Email</p>}
-              <PasswordInput name='password' label='Password' placeholder='Password' register={register} />
+              <PasswordInput name='password' label='Password' labelColor='text-primary' placeholder='Password' register={register} />
               <Button submitType='submit'>Login </Button>
               {authError && <p className='text-red-500'>Invalid Email or password, please try again</p>}
             </form>
@@ -90,7 +89,7 @@ const SignIn = () => {
         </div>
         <div className={Styles.IllustrationContainer}>
           <div className={Styles.IllustrationImage}>
-            <Image src={illustration} alt='illustration' />
+            <Image src={illustration} alt='illustration' className='rounded-lg' />
           </div>
         </div>
       </div>

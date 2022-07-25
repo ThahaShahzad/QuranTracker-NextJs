@@ -9,13 +9,14 @@ import { joiResolver } from '@hookform/resolvers/joi/dist/joi'
 import { AdminSignUpSchema, AdminSignUpType } from 'lib/models/auth'
 import { useAuth } from 'lib/contexts/auth'
 import { useState } from 'react'
-import { useCreateAdminMutation, UserAccType, UserInput } from 'lib/graphql/generated'
+import { UserAccType } from 'lib/graphql/generated'
 import graphqlRequestClient from 'lib/config/clients/fauna'
+import { UserObj } from 'lib/graphql/fixedGenerated'
 
 const SignUp = () => {
   const { signup } = useAuth()
   const [authError, setAuthError] = useState(null)
-  const { mutateAsync } = useCreateAdminMutation(graphqlRequestClient)
+  // const { mutateAsync } = useCreateAdminMutation(graphqlRequestClient)
   const {
     register,
     handleSubmit,
@@ -29,24 +30,24 @@ const SignUp = () => {
       const res = await signup({ email: formData.email, password: formData.password })
       const date = new Date().toISOString()
       if (res) {
-        const userDoc: UserInput = {
+        const userDoc = {
           uid: res.uid,
           firstName: formData.firstName,
           lastName: formData.lastName,
           email: formData.email,
           emailVerified: false,
           accType: UserAccType.Admin,
-          initalAccountCreation: false,
+          initialAccountCreation: false,
           isActivated: false,
           isActive: true,
           submittedApplication: false,
           createdAt: date,
           updatedAt: date
-        }
-        const res1 = await mutateAsync({ input: userDoc })
-        if (res1) {
-          router.push('/auth/signin')
-        }
+        } as UserObj
+        // const res1 = await mutateAsync({ input: userDoc })
+        // if (res1) {
+        //   router.push('/auth/signin')
+        // }
       }
     } catch (error: any) {
       setAuthError(error)

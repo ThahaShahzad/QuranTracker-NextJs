@@ -2,9 +2,9 @@ import React, { useState, useEffect, useContext, createContext } from 'react'
 import firebase from 'lib/config/clients/firebase'
 import { SignInType } from 'lib/models/auth'
 import nookies from 'nookies'
-import { faunaRes } from 'lib/models/faunaRes'
+import { faunaDoc } from 'lib/models/faunaRes'
 import { faunaClient } from 'lib/config/clients/fauna'
-import { Get, Index, Match } from 'faunadb'
+import { Call, Function, Get, Index, Match } from 'faunadb'
 import { useRouter } from 'next/router'
 import { DbUser } from 'lib/models/dbuser'
 
@@ -36,8 +36,10 @@ function useProvideAuth() {
     return firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then((response) => {
-        setUser(response.user)
+      .then(async (response) => {
+        const idToken = (await response.user?.getIdToken()) as string
+        nookies.set(undefined, 'QuranTrackerFirebaseAuthToken', idToken, { path: '/' })
+        // setUser(response.user)
         return response.user
       })
   }
@@ -48,7 +50,7 @@ function useProvideAuth() {
       .createUserWithEmailAndPassword(email, password)
       .then(async (response) => {
         await response.user?.sendEmailVerification()
-        setUser(response.user)
+        // setUser(response.user)
         return response.user
       })
   }
@@ -81,27 +83,32 @@ function useProvideAuth() {
       .signOut()
       .then(() => {
         setUser(false)
+        nookies.set(undefined, 'QuranTrackerFirebaseAuthToken', '', { path: '/' })
         router.push('/auth/signin')
       })
   }
+  //   Merge(Select(["data", "school"], Var("user")), { school: Var("school") })
+  // { ref: Select("ref", Var("classes")) },
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
         try {
           const token = await user.getIdToken()
-          const dbUser: faunaRes<DbUser> = await faunaClient.query(Get(Match(Index('findUserByUID'), user.uid)))
+          const dbUser: faunaDoc<DbUser> = await faunaClient.query(Call(Function('GetUser'), user.uid))
+          dbUser.data.id = dbUser.ref.id
           const idUser = dbUser.data
-          dbUser.data.id = dbUser.ref.value.id
           setUser(idUser)
-          nookies.set(undefined, 'firebaseAuthToken', token, { path: '/' })
+          nookies.set(undefined, 'QuranTrackerFirebaseAuthToken', token, { path: '/' })
+          nookies.set(undefined, 'QuranTrackerUserId', idUser.id, { path: '/' })
         } catch (error) {
           setUser(false)
-          nookies.set(undefined, 'firebaseAuthToken', '', { path: '/' })
+          nookies.set(undefined, 'QuranTrackerFirebaseAuthToken', '', { path: '/' })
         }
       } else {
+        console.log('no user')
         setUser(false)
-        nookies.set(undefined, 'firebaseAuthToken', '', { path: '/' })
+        nookies.set(undefined, 'QuranTrackerFirebaseAuthToken', '', { path: '/' })
       }
     })
 
@@ -110,8 +117,16 @@ function useProvideAuth() {
 
   useEffect(() => {
     const handle = setInterval(async () => {
-      const user = firebase.auth().currentUser
-      if (user) await user.getIdToken(true)
+      try {
+        const user = firebase.auth().currentUser
+        if (user) {
+          const token = await user.getIdToken(true)
+          nookies.set(undefined, 'QuranTrackerFirebaseAuthToken', token, { path: '/' })
+        }
+      } catch (error) {
+        router.push('/auth/signin')
+        console.error(error)
+      }
     }, 10 * 60 * 1000)
 
     // clean up setInterval

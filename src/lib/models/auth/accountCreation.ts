@@ -24,6 +24,62 @@ export interface ClassesType {
   Name: string
   "Teacher's email": string
   Students: any
+  Subjects: any
+}
+export interface form {
+  Parents?: {
+    'First Name': string
+    'Last Name': string
+    Email: string
+    'Child(ren)': string
+  }[]
+  Students?: {
+    'Student ID': string
+    'Parent Email': string
+    'First Name': string
+    'Last Name': string
+    Age: string
+    Grade: string
+  }[]
+  Teachers?: {
+    'First Name': string
+    'Last Name': string
+    Email: string
+  }[]
+  Classes?: {
+    Name: string
+    "Teacher's email": string
+    Students: string[]
+    Subjects: string[]
+  }[]
+}
+export interface completedForm {
+  Parents: {
+    'First Name': string
+    'Last Name': string
+    Email: string
+    'Child(ren)': string
+  }[]
+  Students: {
+    'Student ID': string
+    'Parent Email': string
+    'First Name': string
+    'Last Name': string
+    Age: string
+    Grade: string
+  }[]
+  Teachers: {
+    'First Name': string
+    'Last Name': string
+    Email: string
+  }[]
+  Classes: {
+    Name: string
+    "Teacher's email": string
+    Students: string[]
+    Subjects: string[]
+  }[]
+  schoolId: string
 }
 
 export const ParentAccountSchema = Joi.array().items(
@@ -67,6 +123,7 @@ export const ClassesSchema = Joi.array().items(
       .email({ tlds: { allow: false } })
       .lowercase()
       .required(),
-    Students: Joi.array().items(Joi.string()).required()
+    Students: Joi.array().items(Joi.string()).required(),
+    Subjects: Joi.array().items(Joi.string()).required()
   })
 )

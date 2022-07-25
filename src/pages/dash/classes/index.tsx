@@ -1,16 +1,16 @@
 import Head from 'next/head'
-import ClassesGrid from 'components/dash/classes/Classes'
+import ClassesPage from 'components/dash/Classes'
 import DashLayout from 'components/layouts/DashLayout'
 
 const Classes = () => {
   return (
     <>
       <Head>
-        <title>My Classes - QuranTracker</title>
+        <title>Classes - QuranTracker</title>
         <meta name='description' content='Classes page of QuranTracker' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <ClassesGrid />
+      <ClassesPage />
     </>
   )
 }

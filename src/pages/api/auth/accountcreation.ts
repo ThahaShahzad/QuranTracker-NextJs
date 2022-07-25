@@ -1,281 +1,248 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { generate } from 'generate-password'
+import { hash } from 'bcryptjs'
+import { v4 as uuidv4 } from 'uuid'
 import firebaseAdmin from 'lib/config/clients/firebaseAdmin'
-import axios from 'axios'
-import { form } from 'lib/contexts/accountCreation'
-import graphqlRequestClient from 'lib/config/clients/fauna'
+import { completedForm } from 'lib/models/auth/accountCreation'
+import { faunaClient } from 'lib/config/clients/fauna'
+import { UserAccType } from 'lib/graphql/generated'
+import { Call, Collection, Function, Ref, Update } from 'faunadb'
+import sgMail from '@sendgrid/mail'
+import { SENDGRID_API_KEY, SENDER_EMAIL } from 'lib/config/envVariables'
+import { withFireBaseAuth } from 'lib/middleware/apiMiddleware'
+import { getDbUser } from 'lib/api/services/getUser'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { Teachers, Students, Parents, Classes } = req.body as form
+  const { Teachers, Students, Parents, Classes, schoolId } = req.body as completedForm
+  const date = new Date().toISOString()
+  sgMail.setApiKey(SENDGRID_API_KEY)
+  if (req.method !== 'POST') {
+    return res.status(400).send({ message: 'Only POST requests allowed' })
+  }
+  const user = await getDbUser(req.cookies.uid)
   try {
     console.time('Total')
-    // loop over teachers and call /api/v2/users to create their accounts
-    // use firstName = given_name && lastName = family_name and generate random password
-    // get array of all teacher accounts
     console.time('teachers create')
-    // const teacherAccounts: Auth0CreateAccRes[] = []
-    // await Promise.all(
-    Teachers?.map(async (teacher) => {
-      // teacher.name = `${teacher['First Name']} ${teacher['Last Name']}`
-      // teacher.teacherClasses = []
-      const generatedPassowrd = generate({
-        length: 10,
-        numbers: true
+    const teacherDbDocs: any[] = []
+    const teacherTableData: any[] = []
+    const teachersWithHashedPasswords = await Promise.all(
+      Teachers.map(async (teacher) => {
+        const userUID = uuidv4()
+        const generatedPassword = generate({
+          length: 10,
+          numbers: true
+        })
+        const hashedPassword = await hash(generatedPassword, 10)
+        const teacherDoc = {
+          uid: userUID,
+          firstName: teacher['First Name'],
+          lastName: teacher['Last Name'],
+          email: teacher.Email,
+          emailVerified: false,
+          accType: UserAccType.Teacher,
+          school: Ref(Collection('school'), schoolId),
+          isActive: true,
+          createdAt: date,
+          updatedAt: date
+        }
+        teacherDbDocs.push(teacherDoc)
+        const teacherData = {
+          firstName: teacher['First Name'],
+          lastName: teacher['Last Name'],
+          email: teacher.Email,
+          password: generatedPassword
+        }
+        teacherTableData.push(teacherData)
+        return {
+          uid: userUID,
+          displayName: `${teacher['First Name']} ${teacher['Last Name']}`,
+          email: teacher.Email,
+          emailVerified: false,
+          passwordHash: Buffer.from(hashedPassword),
+          disabled: false
+        }
       })
-      const firebaseUser = await firebaseAdmin.auth().createUser({
-        email: teacher.Email,
-        emailVerified: false,
-        password: generatedPassowrd,
-        disabled: false
-      })
-      //   graphqlRequestClient.request()
-      // teacher.password = generatedPassowrd
-      // const response: any = await axios.post(`${auth0ApiUrl}/api/v2/users`, teacher, {
-      //   headers: {
-      //     authorization: `Bearer ${session}`
-      //   }
-      // })
-      // const savedTeacher = response.data
-      // teacherAccounts.push(savedTeacher)
+    )
+    const teacherFirebaseResults = await firebaseAdmin.auth().importUsers(teachersWithHashedPasswords, {
+      hash: {
+        algorithm: 'BCRYPT'
+      }
     })
-    // )
+    const createdTeacherDocs: any[] = await faunaClient.query(Call(Function('CreateManyTeachers'), teacherDbDocs))
+    // console.log(createdTeacherDocs)
     console.timeEnd('teachers create')
     console.time('parents create')
-    // SAME AS ^^ JUST FOR PARENTS
-    // const parentAccounts: Auth0CreateAccRes[] = []
-    // const parentChildren = Parents?.map((parent) => parent['Child(ren)'])
-    // await Promise.all(
-    Parents?.map(async (parent) => {
-      // parent.name = `${parent.given_name} ${parent.family_name}`
-      // parent.children = []
-      const generatedPassowrd = generate({
-        length: 10,
-        numbers: true
+    const parentDbDocs: any[] = []
+    const parentTableData: any[] = []
+    const parentsWithHashedPasswords = await Promise.all(
+      Parents.map(async (parent) => {
+        const userUID = uuidv4()
+        const generatedPassword = generate({
+          length: 10,
+          numbers: true
+        })
+        const hashedPassword = await hash(generatedPassword, 10)
+        const parentDoc = {
+          uid: userUID,
+          firstName: parent['First Name'],
+          lastName: parent['Last Name'],
+          email: parent.Email,
+          emailVerified: false,
+          accType: UserAccType.Parent,
+          school: Ref(Collection('school'), schoolId),
+          isActive: true,
+          createdAt: date,
+          updatedAt: date
+        }
+        parentDbDocs.push(parentDoc)
+        const parentData = {
+          firstName: parent['First Name'],
+          lastName: parent['Last Name'],
+          email: parent.Email,
+          password: generatedPassword
+        }
+        parentTableData.push(parentData)
+        return {
+          uid: userUID,
+          displayName: `${parent['First Name']} ${parent['Last Name']}`,
+          email: parent.Email,
+          emailVerified: false,
+          passwordHash: Buffer.from(hashedPassword),
+          disabled: false
+        }
       })
-      const firebaseUser = await firebaseAdmin.auth().createUser({
-        email: parent.Email,
-        emailVerified: false,
-        password: generatedPassowrd,
-        disabled: false
-      })
-      // parent.password = generatedPassowrd
-      // const response: any = await axios.post(`${auth0ApiUrl}/api/v2/users`, parent, {
-      //   headers: {
-      //     authorization: `Bearer ${session}`
-      //   }
-      // })
-      // const savedParent: Auth0CreateAccRes = response.data
-      // parentAccounts.push(savedParent)
+    )
+    const parentFirebaseResults = await firebaseAdmin.auth().importUsers(parentsWithHashedPasswords, {
+      hash: {
+        algorithm: 'BCRYPT'
+      }
     })
-    // )
+    const createdParentDocs: any[] = await faunaClient.query<any[]>(Call(Function('CreateManyParents'), parentDbDocs))
+    // console.log(createdParentDocs)
     console.timeEnd('parents create')
-    // console.time('students create')
-    // // loop over students and make new document for each
-    // // get array of all student documents
-    // const studentDocuments: IStudents[] = []
-    // await Promise.all(
-    //   accountsJson.students.map(async (student) => {
-    //     student.studentClasses = []
-    //     const savedStudent = await Students.create(student)
-    //     studentDocuments.push(savedStudent)
-    //     // update parent users document with thier childrens Id
-    //     const parentAcc = parentAccounts.find((parent) => parent.email === student.parentEmail)
-    //     if (parentAcc) {
-    //       const savedParent = await Users.updateOne(
-    //         { _id: parentAcc.user_id.substring(6) },
-    //         { $push: { children: savedStudent._id } }
-    //       )
-    //     }
-    //   })
-    // )
-    // console.timeEnd('students create')
-    // console.time('classes create')
-    // // loop over classes and make new document for each
-    // const classesDocuments: IClasses[] = []
-    // await Promise.all(
-    //   accountsJson.classes.map(async (classI, i) => {
-    //     // match class names from teachers arary(json) to add teacherId as teacher field
-    //     const teacherAcc = teacherAccounts.find((teacher) => teacher.email === classI.teacherEmail)
-    //     // match class names from student arary(json) to add all studentIds to studnets[]
-    //     const studentAccs = accountsJson.students.map((student, i) => {
-    //       const isPartofClass = student.studentClasses.find((classId) => classId === classI.classId)
-    //       if (isPartofClass) classI.students.push(studentDocuments[i]._id)
-    //     })
-    //     const savedClass = await Classes.create({
-    //       name: classI.name,
-    //       teacherId: teacherAcc?.user_id.substring(6),
-    //       students: classI.students
-    //     })
-    //     classesDocuments.push(savedClass)
-    //   })
-    // )
-    // console.timeEnd('classes create')
-    // console.time('teachClasses, studentClasses')
-    // await Promise.all(
-    //   classesDocuments.map(async (classI) => {
-    //     // match teacher from classes document to add classIds to teacher in User.teacherClasses
-    //     const teacher = teacherAccounts.find((teacher) => teacher.user_id.substring(6) === classI.teacherId)
-    //     if (teacher) {
-    //       const savedTeacher = Users.updateOne(
-    //         { _id: teacher.user_id.substring(6) },
-    //         { $push: { teacherClasses: classI._id } }
-    //       )
-    //     }
-    //     // match class name in classes to class names in student arary(json) to add classId to students.classes
-    //     //   const student = studentDocuments.find((student) => student._id === classI.students)
-    //     const student = studentDocuments.map((student) => {
-    //       const isPartofClass = classI.students.find((studentId) => studentId === student._id)
-    //       if (isPartofClass) {
-    //         const savedStudent = Students.updateOne({ _id: student._id }, { $push: { studentClasses: classI._id } })
-    //       }
-    //     })
-    //   })
-    // )
-    // console.timeEnd('teachClasses, studentClasses')
+    console.time('students create')
+    const studentDbDocs: any[] = []
+    await Promise.all(
+      Students.map((student) => {
+        const parentDoc = createdParentDocs.find((parent) => parent.data.email === student['Parent Email'])
+        const studentDoc = {
+          studentId: student['Student ID'],
+          firstName: student['First Name'],
+          lastName: student['Last Name'],
+          parent: Ref(Collection('user'), parentDoc.ref.id),
+          school: Ref(Collection('school'), schoolId),
+          assignments: [],
+          isActive: true,
+          createdAt: date,
+          updatedAt: date
+        }
+        studentDbDocs.push(studentDoc)
+      })
+    )
+    const createdStudentDocs: any[] = await faunaClient.query<any[]>(Call(Function('CreateManyStudents'), studentDbDocs))
+    // console.log(createdStudentDocs)
+    console.timeEnd('students create')
+    console.time('classes create')
+    const classesDbDocs: any[] = []
+    await Promise.all(
+      Classes.map((clas) => {
+        const teacherDoc = createdTeacherDocs.find((teacher) => teacher.data.email === clas["Teacher's email"])
+        const studentDocs = createdStudentDocs.filter((student) => clas.Students.indexOf(student.data.studentId) !== -1)
+        const studentRefs = studentDocs.map((studentDoc) => {
+          return Ref(Collection('student'), studentDoc.ref.id)
+        })
+        const classDoc = {
+          name: clas.Name,
+          teacher: Ref(Collection('user'), teacherDoc.ref.id),
+          students: studentRefs,
+          school: Ref(Collection('school'), schoolId),
+          isActive: true,
+          createdAt: date,
+          updatedAt: date
+        }
+        classesDbDocs.push(classDoc)
+      })
+    )
+    const createdClassesDocs = await faunaClient.query<any[]>(Call(Function('CreateManyClasses'), classesDbDocs))
+    const studentClasses = createdStudentDocs.map((student, i) => {
+      const classes = createdClassesDocs.filter((clas) => clas.students.indexOf(Ref(Collection('student'), student.ref.id) !== -1))
+      const classIds = classes.map((clas) => {
+        return Ref(Collection('classes'), clas.ref.id)
+      })
+      return {
+        studentId: Ref(Collection('student'), student.ref.id),
+        classIds
+      }
+    })
+    const linkStudentsToClasses = await faunaClient.query<any[]>(Call(Function('LinkStudentsToClasses'), studentClasses))
+    // console.log(createdClassesDocs)
+    console.timeEnd('classes create')
+    console.time('send emails')
+    const adminEmail = user.email as string
+    const teacherRows = teacherTableData.map((teacher) => {
+      return `<tr>
+        <td>${teacher.firstName}</td>
+        <td>${teacher.lastName}</td>
+        <td>${teacher.email}</td>
+        <td>${teacher.password}</td>
+        <td>Teacher</td>
+      </tr>`
+    })
+    const parentRows = parentTableData.map((parent) => {
+      return `<tr>
+        <td>${parent.firstName}</td>
+        <td>${parent.lastName}</td>
+        <td>${parent.email}</td>
+        <td>${parent.password}</td>
+        <td>Parent</td>
+      </tr>`
+    })
+    const msgToAdmin: sgMail.MailDataRequired = {
+      to: adminEmail,
+      from: SENDER_EMAIL,
+      subject: 'QuranTracker Account Creation',
+      text: 'QuranTracker Account Creation completed',
+      html: `<body>
+                <style>
+                  table {
+                    font-family: arial, sans-serif;
+                    border-collapse: collapse;
+                    width: 100%;
+                  }
+
+                  td,
+                  th {
+                    border: 1px solid #dddddd;
+                    text-align: left;
+                    padding: 8px;
+                  }
+
+                  tr:nth-child(even) {
+                    background-color: #dddddd;
+                  }
+              </style>
+              <h2>Asalamualaykum admin</h2>
+              <p>account creation completed here are all created accounts</p>
+              <table>
+                <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Password</th>
+                  <th>Account Type</th>
+                </tr>
+                ${teacherRows.join('')}${parentRows.join('')}
+              </table>
+                </body>`
+    }
+    const adminEmailRes = await sgMail.send(msgToAdmin)
+    console.timeEnd('send emails')
+    const updateUser = await faunaClient.query(Update(Ref(Collection('user'), user.id), { data: { initialAccountCreation: true } }))
     console.timeEnd('Total')
     res.status(200).send(true)
   } catch (error) {
     console.error(error)
+    res.send(error)
   }
 }
-export default handler
-
-// const accountsJson = {
-//   classes: [
-//     {
-//       classId: 1,
-//       name: 'memo',
-//       teacherEmail: 'main.alquda@gmail.com',
-//       students: ['Adam', 'Sara', 'Ibrahim']
-//     },
-//     { classId: 2, name: 'revison', teacherEmail: 'arifKhan@gmail.com', students: ['Ali', 'Khizar', 'Omair'] },
-//     { classId: 3, name: 'sabqi', teacherEmail: 'hamzaGhia@gmail.com', students: ['Aaeesha', 'Aasia', 'Adnan'] }
-//   ],
-//   teachers: [
-//     {
-//       name: '',
-//       given_name: 'Main',
-//       family_name: 'Al-Quda',
-//       email: 'main.alquda@gmail.com',
-//       password: '',
-//       teacherClasses: [1]
-//     },
-//     {
-//       name: '',
-//       given_name: 'Arif',
-//       family_name: 'Khan',
-//       email: 'arifKhan@gmail.com',
-//       password: '',
-//       teacherClasses: [2]
-//     },
-//     {
-//       name: '',
-//       given_name: 'Hamza',
-//       family_name: 'Ghia',
-//       email: 'hamzaGhia@gmail.com',
-//       password: '',
-//       teacherClasses: [3]
-//     }
-//   ],
-//   parents: [
-//     {
-//       name: '',
-//       given_name: 'Tamuir',
-//       family_name: 'Sid',
-//       email: 'Tamuir.Sid@gmail.com',
-//       password: '',
-//       children: ['Ali', 'Omair', 'Adnan']
-//     },
-//     {
-//       name: '',
-//       given_name: 'Matin',
-//       family_name: 'Baji',
-//       email: 'Matin.Baji@gmail.com',
-//       password: '',
-//       children: ['Khizar', 'Aaeesha', 'Sara']
-//     },
-//     {
-//       name: '',
-//       given_name: 'Saleem',
-//       family_name: 'Udeen',
-//       email: 'Saleem.Udeen@gmail.com',
-//       password: '',
-//       children: ['Adam', 'Aasia', 'Ibrahim']
-//     }
-//   ],
-
-//   students: [
-//     {
-//       parentEmail: 'Saleem.Udeen@gmail.com',
-//       firstName: 'Adam',
-//       lastName: 'lname',
-//       age: '',
-//       grade: '',
-//       studentClasses: [1]
-//     },
-//     {
-//       parentEmail: 'Matin.Baji@gmail.com',
-//       firstName: 'Sara',
-//       lastName: 'lname',
-//       age: '',
-//       grade: '',
-//       studentClasses: [1]
-//     },
-//     {
-//       parentEmail: 'Saleem.Udeen@gmail.com',
-//       firstName: 'Ibrahim',
-//       lastName: 'lname',
-//       age: '',
-//       grade: '',
-//       studentClasses: [1]
-//     },
-//     {
-//       parentEmail: 'Tamuir.Sid@gmail.com',
-//       firstName: 'Ali',
-//       lastName: 'lname',
-//       age: '',
-//       grade: '',
-//       studentClasses: [2]
-//     },
-//     {
-//       parentEmail: 'Matin.Baji@gmail.com',
-//       firstName: 'Khizar',
-//       lastName: 'lname',
-//       age: '',
-//       grade: '',
-//       studentClasses: [2]
-//     },
-//     {
-//       parentEmail: 'Tamuir.Sid@gmail.com',
-//       firstName: 'Omair',
-//       lastName: 'lname',
-//       age: '',
-//       grade: '',
-//       studentClasses: [2]
-//     },
-//     {
-//       parentEmail: 'Matin.Baji@gmail.com',
-//       firstName: 'Aaeesha',
-//       lastName: 'lname',
-//       age: '',
-//       grade: '',
-//       studentClasses: [3]
-//     },
-//     {
-//       parentEmail: 'Saleem.Udeen@gmail.com',
-//       firstName: 'Aasia',
-//       lastName: 'lname',
-//       age: '',
-//       grade: '',
-//       studentClasses: [3]
-//     },
-//     {
-//       parentEmail: 'Tamuir.Sid@gmail.com',
-//       firstName: 'Adnan',
-//       lastName: 'lname',
-//       age: '',
-//       grade: '',
-//       studentClasses: [3]
-//     }
-//   ]
-// }
+export default withFireBaseAuth(handler)

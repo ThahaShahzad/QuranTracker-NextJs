@@ -1,10 +1,13 @@
-export type faunaRes<Type> = {
+export type faunaDoc<Type> = {
   data: Type
   ref: {
-    value: {
+    id: string
+    '@ref': {
       id: string
-      collection: object
     }
   }
   ts: number
+}
+export type faunaRes<Type> = {
+  data: Type
 }

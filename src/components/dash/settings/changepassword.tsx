@@ -1,6 +1,6 @@
 import { joiResolver } from '@hookform/resolvers/joi/dist/joi'
 import { Button, Link, PasswordInput } from 'components/custom'
-import { Axios } from 'lib/api/axios'
+import { Axios } from 'lib/config/clients/axios'
 import { ChangePasswordSchema, ChangePasswordType } from 'lib/models/dash/settings/changepassword'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'

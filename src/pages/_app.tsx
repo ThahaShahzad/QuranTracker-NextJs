@@ -17,7 +17,7 @@ const EmptyLayout: React.FC = ({ children }) => {
 function MyApp({ Component, pageProps }: Props) {
   const Layout = Component.getLayout || EmptyLayout
   return (
-    <RootContext layout={Component.getLayout}>
+    <RootContext layout={Component.getLayout} pageProps={pageProps}>
       <Layout>
         <Component {...pageProps} />
       </Layout>

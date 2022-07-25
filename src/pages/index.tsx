@@ -4,6 +4,7 @@ import LandingLayout from 'components/layouts/LandingLayout'
 import { LandingPageDetails } from 'public/LandingDeatils'
 import { GetServerSidePropsContext } from 'next'
 import { withPageAuthToDash } from 'lib/middleware/pageMiddleware'
+import { ThemeToggleFloatingButton } from 'components/custom'
 
 const Landing = () => {
   return (
@@ -11,9 +12,9 @@ const Landing = () => {
       <Head>
         <title>QuranTracker</title>
         <meta name='description' content='Dashboard of QuranTracker' />
-        <link rel='icon' href='/favicon.ico' />
+        <link rel='icon' type='ico' href='/favicon.ico' />
       </Head>
-
+      <ThemeToggleFloatingButton />
       <Hero {...LandingPageDetails.Hero} />
       <Features {...LandingPageDetails.Features} />
       <MainFeatures {...LandingPageDetails.MainFeatures} />

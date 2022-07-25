@@ -23,7 +23,7 @@
   /* --color-primary: #76dbd1;
   --color-dark-primary: #57a99a;
   --font-color: #f3f8f7;
-  --bg-color: #0d1f23;
+  --bg-color: #black;
   --bg-light-color: #38474b;
   --font-dark-color: #0d1f23;
   --bg-dark-color: #f3f8f7; */
@@ -35,7 +35,7 @@
   --bg-color: #0d1f23;
   --bgOpp-color: #f3f8f7;
   --font-light-color: #98a4b5;
-  --bg-light-color: #d1d6d6fb;
+  --bg-light-color: #184049;
 }
 @layer base {
   /* Base */
